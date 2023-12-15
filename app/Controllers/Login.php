@@ -8,22 +8,6 @@ class Login extends BaseController
 {
     public function index()
     {
-        // Mengambil pesan sukses/error dari flash data
-        $successMessage = session()->getFlashdata('success');
-        $errorMessage = session()->getFlashdata('err');
-
-        // Menampilkan pesan sukses/error jika ada
-        if ($successMessage) {
-            echo '<div class="alert alert-success alert-dismissible fade show" role="alert" style="margin-bottom: 10px;">';
-            echo $successMessage;
-            echo '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>';
-            echo '</div>';
-        } elseif ($errorMessage) {
-            echo '<div class="alert alert-danger alert-dismissible fade show" role="alert" style="margin-bottom: 10px;">';
-            echo $errorMessage;
-            echo '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>';
-            echo '</div>';
-        }
         return view('login');
     }
 
@@ -39,26 +23,28 @@ class Login extends BaseController
             $pass = $data['password'];
 
             if (password_verify($password, $pass)) {
+                // Store user data in the session
                 $ses_data = [
                     'id' => $data['id'],
                     'username' => $data['username'],
                     'email' => $data['email'],
-                    'password' => $data['password'],
-                    'logged_in' => TRUE
+                    'logged_in' => true,
                 ];
-                $session->setFlashdata('success', 'Login Berhasil');
                 $session->set($ses_data);
-                return redirect()->to('/Dashboard');
-            } else {
-                $session->setFlashdata('err', 'Password/email salah!, Silahkan Periksa Kembali! ');
-                return redirect()->to('/login');
+
+                // Redirect to the dashboard with success message
+                return redirect()->to('Dashboard')->with('success', 'Login Berhasil');
             }
         }
+
+        // If email or password is incorrect, redirect to login with error message
+        return redirect()->to('Login')->with('error', 'Password/email salah! Silahkan periksa kembali!');
     }
-    function logout()
+
+    public function logout()
     {
+        // Destroy the session on logout
         session()->destroy();
         return redirect()->to('/login');
     }
 }
-?>

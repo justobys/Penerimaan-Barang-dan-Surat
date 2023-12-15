@@ -38,28 +38,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <ul class="navbar-nav ml-auto">
                 <!-- Navbar Search -->
                 <li class="nav-item">
-                    <a class="nav-link" data-widget="navbar-search" href="#" role="button">
-                        <i class="fas fa-search"></i>
-                    </a>
-                    <div class="navbar-search-block">
-                        <form class="form-inline">
-                            <div class="input-group input-group-sm">
-                                <input class="form-control form-control-navbar" type="search" placeholder="Search"
-                                    aria-label="Search">
-                                <div class="input-group-append">
-                                    <button class="btn btn-navbar" type="submit">
-                                        <i class="fas fa-search"></i>
-                                    </button>
-                                    <button class="btn btn-navbar" type="button" data-widget="navbar-search">
-                                        <i class="fas fa-times"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </li>
-
-                <li class="nav-item">
                     <a class="nav-link" data-widget="fullscreen" href="#" role="button">
                         <i class="fas fa-expand-arrows-alt"></i>
                     </a>
@@ -129,7 +107,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="<?= base_url('P_Barang') ?>" class="nav-link">
+                                    <a href="<?= base_url('DaftarBarang') ?>" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Penerimaan Barang</p>
                                     </a>
@@ -240,15 +218,16 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                         </thead>
                                         <tbody>
                                             <?php
-                                            if (isset($data['brg']) && is_array($data['brg'])):
-                                                foreach ($data['brg'] as $p):
+                                            $row = 1;
+                                            if (isset($data) && is_array($data)):
+                                                foreach ($data as $p):
                                                     ?>
                                                     <tr>
                                                         <td>
-                                                            <?= $p['id'] ?>
+                                                            <?= $row++ ?>
                                                         </td>
                                                         <td>
-                                                            <?= $p['tanggal'] ?>
+                                                            <?= date('d/m/Y', strtotime($p['tanggal'])); ?>
                                                         </td>
                                                         <td>
                                                             <?= $p['no_resi'] ?>
@@ -260,7 +239,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                                             <?= $p['nama_pegawai'] ?>
                                                         </td>
                                                         <td>
-                                                            <?= $p['status'] ?>
+                                                            <?php if ($p['status'] == 'Diterima') {
+                                                                echo '<span class="badge badge-success">Diterima</span>';
+                                                            } else {
+                                                                echo '<span class="badge badge-danger">Belum Diterima</span>';
+                                                            }
+                                                            ?>
                                                         </td>
                                                     </tr>
                                                     <?php
@@ -363,7 +347,31 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <script src="../../plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
     <!-- AdminLTE App -->
     <script src="../../dist/js/adminlte.min.js"></script>
+    <!-- Sweet Alert -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <!-- Page specific script -->
+    <!-- SweetAlert Error Modal -->
+    <script>
+        <?php if (isset($errors) && !empty($errors)): ?>
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                html: '<?php echo implode("<br>", $errors); ?>',
+            });
+        <?php endif; ?>
+    </script>
+
+    <!-- SweetAlert Success Modal -->
+    <script>
+        <?php if (session()->get('success')): ?>
+            Swal.fire({
+                icon: 'success',
+                title: 'Success',
+                text: <?php echo json_encode(session()->get('success')); ?>,
+            });
+        <?php endif; ?>
+    </script>
+
     <!-- Table Barang -->
     <script>
         $(function () {

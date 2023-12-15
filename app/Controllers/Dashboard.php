@@ -2,24 +2,26 @@
 
 namespace App\Controllers;
 
-use App\Models\Datatable;
+use App\Models\DataBarangM;
 
 class Dashboard extends BaseController
 {
     public function index()
     {
-        return view('dashboard');
+        $model = new DataBarangM();
+        $data = $model->getTableBarang();
+        return view('dashboard', compact('data'));
     }
 
-    public function datatable()
-    {
-        $model = new Datatable();
-        $data['brg'] = $model->getTableBarang();
+    // public function datatable()
+    // {
+    //     $model = new Datatable();
+    //     $data['brg'] = $model->getTableBarang();
 
-        // Debugging line
-        print_r($data['brg']);
+    //     // Debugging line
+    //     print_r($data['brg']);
 
-        return $this->response->setJSON($data);
-    }
+    //     return $this->response->setJSON($data);
+    // }
 
 }

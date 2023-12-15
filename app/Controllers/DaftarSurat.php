@@ -2,7 +2,7 @@
 
 namespace App\Controllers;
 
-class P_Surat extends BaseController
+class DaftarSurat extends BaseController
 {
     public function index()
     {

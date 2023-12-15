@@ -90,6 +90,30 @@
         <!-- data-aos -->
         <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
         <script src="../js/main.js"></script>
+        <!-- Sweet Alert -->
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <!-- Page specific script -->
+        <!-- SweetAlert Error Modal -->
+        <script>
+            <?php if (isset($errors) && !empty($errors)): ?>
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    html: '<?php echo implode("<br>", $errors); ?>',
+                });
+            <?php endif; ?>
+        </script>
+
+        <!-- SweetAlert Success Modal -->
+        <script>
+            <?php if (session()->get('success')): ?>
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Success',
+                    text: <?php echo json_encode(session()->get('success')); ?>,
+                });
+            <?php endif; ?>
+        </script>
 </body>
 
 </html>

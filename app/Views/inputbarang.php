@@ -8,7 +8,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Ubah Password</title>
+    <title>Input Barang Masuk</title>
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet"
@@ -40,6 +40,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <!-- Right navbar links -->
             <ul class="navbar-nav ml-auto">
                 <!-- Navbar Search -->
+
                 <li class="nav-item">
                     <a class="nav-link" data-widget="fullscreen" href="#" role="button">
                         <i class="fas fa-expand-arrows-alt"></i>
@@ -58,12 +59,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1 class="m-0">Ubah Password</h1>
+                            <h1 class="m-0">Input Barang Masuk</h1>
                         </div><!-- /.col -->
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
                                 <li class="breadcrumb-item"><a href="<?= base_url('Dashboard/index') ?>">Home</a></li>
-                                <li class="breadcrumb-item active">Ubah Password</li>
+                                <li class="breadcrumb-item active">Input Barang</li>
                             </ol>
                         </div><!-- /.col -->
                     </div><!-- /.row -->
@@ -79,53 +80,64 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             <div class="card">
                                 <!-- Card Header -->
                                 <div class="card-header">
-                                    <form action="<?= base_url('UbahPassword/ubah') ?>" method="post">
-                                        <div class="form-group">
-                                            <label for="email">Email</label>
-                                            <div class="input-group mb-3">
-                                                <input type="email" class="form-control col-md-12" placeholder="Email"
-                                                    name="email" value="<?= $session->get('email') ?>" readonly>
+                                    <form action="<?= base_url('DaftarBarang/tambahBarang') ?>" method="post"
+                                        enctype="multipart/form-data">
+                                        <div class="row">
+                                            <!-- Bagian Kiri -->
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="no_resi">No. Resi</label>
+                                                    <input type="text" class="form-control" id="no_resi" name="no_resi"
+                                                        placeholder="Masukkan No. Resi" required>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="nama_barang">Nama Barang</label>
+                                                    <input type="text" class="form-control" id="nama_barang"
+                                                        name="nama_barang" placeholder="Masukkan Nama Barang" required>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="deskripsi">Deskripsi</label>
+                                                    <textarea class="form-control" id="deskripsi" name="deskripsi"
+                                                        rows="3" placeholder="Masukkan Deskripsi" required></textarea>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="username">Username</label>
-                                            <div class="input-group mb-3">
-                                                <input type="username" class="form-control col-12"
-                                                    placeholder="username" name="username"
-                                                    value="<?= $session->get('username') ?>" readonly>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="password">Password</label>
-                                            <div class="input-group mb-3">
-                                                <input type="password" class="form-control col-12"
-                                                    placeholder="Password" name="password" id="password">
-                                                <div class="input-group-append">
-                                                    <button type="button" class="btn btn-outline-secondary"
-                                                        id="togglePassword">
-                                                        <span class="fas fa-eye"></span>
-                                                    </button>
+
+                                            <!-- Bagian Kanan -->
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="pegawai">Pegawai</label>
+                                                    <select class="form-control" id="id_pegawai" name="id_pegawai"
+                                                        required>
+                                                        <?php foreach ($dataPegawai as $pegawai): ?>
+                                                            <option value="<?= $pegawai['id_pegawai'] ?>">
+                                                                <?= $pegawai['nama_pegawai'] ?>
+                                                            </option>
+                                                        <?php endforeach; ?>
+                                                    </select>
+
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="foto_barang">Foto Barang</label>
+                                                    <input type="file" class="form-control-file" id="foto_barang"
+                                                        name="foto_barang" accept="image/*">
+                                                </div>
+                                                <div class="form-group  mt-4">
+                                                    <label for="status">Status</label>
+                                                    <select class="form-control" id="status" name="status" required>
+                                                        <option value="Belum Diterima">Belum Diterima</option>
+                                                        <option value="Diterima">Diterima</option>
+                                                    </select>
+                                                    <div class="mt-2 ml-2">
+                                                        <button type="button"
+                                                            class="btn btn-danger mr-auto col-auto">Batal</button>
+                                                        <button type="submit"
+                                                            class="btn btn-primary ml-auto col-auto">Simpan</button>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="form-group">
-                                            <label for="password2">Konfirmasi Password</label>
-                                            <div class="input-group mb-3">
-                                                <input type="password" class="form-control col-12"
-                                                    placeholder="Password" name="password_confirm"
-                                                    id="password_confirm">
-                                            </div>
-                                        </div>
-                                        <div class="d-flex justify-content-start">
-                                            <a href="<?= base_url('Dashboard/index') ?>"
-                                                class="btn btn-danger mr-5"><span class="fas fa-times"></span>
-                                                Batal</a>
-                                            <button type="submit" class="btn btn-primary"><span
-                                                    class="fas fa-edit"></span>
-                                                Ubah
-                                                Password</button>
-                                        </div>
                                     </form>
+
                                 </div>
                             </div>
                         </div>
@@ -135,7 +147,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <!-- /.content -->
 
             <!-- Main Footer -->
-            <footer class="ml-2 mr-2">
+            <footer class="ml-2 mr-2 mt-auto">
                 <!-- To the right -->
                 <div class="float-right d-none d-sm-inline">
                     Anything you want
