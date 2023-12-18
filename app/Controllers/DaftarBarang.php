@@ -10,9 +10,11 @@ class DaftarBarang extends BaseController
     {
         $model = new DataBarangM();
         $search = $this->request->getGet('search');
-        $data = $model->getData($search);
+        $date = $this->request->getGet('date');
+        $data = $model->getData($search, $date); // Pass both $search and $date
         return view('penerimaan_barang', compact('data'));
     }
+
 
     public function tambahBarang()
     {

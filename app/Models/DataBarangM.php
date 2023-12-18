@@ -54,18 +54,24 @@ class DataBarangM extends Model
         return $this->find($id);
     }
 
-    public function getData($search)
+    public function getData($search, $date)
     {
-        return $this->db->table($this->table)
+        $query = $this->db->table($this->table)
             ->select('tbl_penerimaan_barang.*, tbl_pegawai.nama_pegawai')
-            ->join('tbl_pegawai', 'tbl_pegawai.id_pegawai = tbl_penerimaan_barang.id_pegawai', 'left')
-            ->like('no_resi', $search)
-            ->orLike('nama_barang', $search)
-            ->orLike('deskripsi', $search)
-            ->orLike('status', $search)
-            ->orLike('nama_pegawai', $search)
-            ->get()
-            ->getResultArray();
+            ->join('tbl_pegawai', 'tbl_pegawai.id_pegawai = tbl_penerimaan_barang.id_pegawai', 'left');
+
+        if (!empty($search)) {
+            $query->like('tbl_penerimaan_barang.no_resi', $search);
+            $query->orLike('tbl_penerimaan_barang.nama_barang', $search);
+            $query->orLike('tbl_pegawai.nama_pegawai', $search);
+        }
+
+        if (!empty($date)) {
+            $query->like('tbl_penerimaan_barang.tanggal', $date);
+        }
+
+        return $query->get()->getResultArray();
     }
+
 }
 ?>

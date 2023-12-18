@@ -164,7 +164,7 @@
                       <input type="search" name="search" class="form-control col-auto ml-auto mr-1"
                         placeholder="Search">
                       <input type="date" name="date" class="form-control col-auto ml-auto mr-1" placeholder="Date">
-                      <!-- <button type="submit" class="btn btn-success ml-auto">Search</button> -->
+                      <button type="submit" class="btn btn-success ml-auto">Search</button>
                     </form>
                   </div>
                 </div>
