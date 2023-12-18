@@ -41,5 +41,31 @@ class DataBarangM extends Model
         return $this->db->table($this->table)->insert($data);
     }
 
+
+    public function updateBarang($id, array $data)
+    {
+        return $this->db->table($this->table)
+            ->where('id', $id)
+            ->update($data);
+    }
+
+    public function getBarangById($id)
+    {
+        return $this->find($id);
+    }
+
+    public function getData($search)
+    {
+        return $this->db->table($this->table)
+            ->select('tbl_penerimaan_barang.*, tbl_pegawai.nama_pegawai')
+            ->join('tbl_pegawai', 'tbl_pegawai.id_pegawai = tbl_penerimaan_barang.id_pegawai', 'left')
+            ->like('no_resi', $search)
+            ->orLike('nama_barang', $search)
+            ->orLike('deskripsi', $search)
+            ->orLike('status', $search)
+            ->orLike('nama_pegawai', $search)
+            ->get()
+            ->getResultArray();
+    }
 }
 ?>

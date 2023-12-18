@@ -1,14 +1,10 @@
 <!DOCTYPE html>
-<!--
-This is a starter template page. Use this page to start your new project from
-scratch. This page gets rid of all links and provides the needed markup only.
--->
 <html lang="en">
 
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>AdminLTE 3 | Starter</title>
+  <title>Daftar Penerimaan Barang</title>
 
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet"
@@ -69,7 +65,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
             $session = \Config\Services::session();
             echo "<a href='#' class='d-block'>" . $session->get('username') . "</a>";
             ?>
-
           </div>
         </div>
 
@@ -88,8 +83,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <!-- Sidebar Menu -->
         <nav class="mt-2">
           <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-            <!-- Add icons to the links using the .nav-icon class
-               with font-awesome or any other icon font library -->
             <li class="nav-item">
               <a href="<?= base_url('Dashboard') ?>" class="nav-link">
                 <i class="nav-icon fas fa-user"></i>
@@ -97,6 +90,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                   Dashboard
                 </p>
               </a>
+            </li>
             <li class="nav-item menu-open">
               <a href="#" class="nav-link active">
                 <i class="nav-icon fas fa-table"></i>
@@ -165,9 +159,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
                   <a href="<?= base_url('DaftarBarang/tambahBarang') ?>" class="btn btn-primary"><i
                       class="fas fa-plus"></i>
                     Tambah</a>
-                  <input type="search" class="form-control float-right col-3 ml-3" placeholder="search">
-                  <input type="date" class="form-control float-right col-2" placeholder="date">
-                  <!-- <h3 class="card-title">DataTable with minimal features & hover style</h3> -->
+                  <div class="float-right ml-4">
+                    <form action="<?= base_url('DaftarBarang') ?>" method="get" class="form-inline">
+                      <input type="search" name="search" class="form-control col-auto ml-auto mr-1"
+                        placeholder="Search">
+                      <input type="date" name="date" class="form-control col-auto ml-auto mr-1" placeholder="Date">
+                      <!-- <button type="submit" class="btn btn-success ml-auto">Search</button> -->
+                    </form>
+                  </div>
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body">
@@ -191,13 +190,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         foreach ($data as $p):
                           ?>
                           <tr>
-                            <td>
+                            <td class="text-center">
                               <?= $p['id'] ?>
                             </td>
-                            <td>
+                            <td class="text-center">
                               <?= date('d/m/Y', strtotime($p['tanggal'])); ?>
                             </td>
-                            <td>
+                            <td class="text-center">
                               <?= $p['no_resi'] ?>
                             </td>
                             <td class="text-center">
@@ -206,7 +205,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             <td>
                               <?= $p['deskripsi'] ?>
                             </td>
-                            <td>
+                            <td class="text-center">
                               <?php if (!empty($p['foto_barang'])): ?>
                                 <img src="<?= base_url($p['foto_barang']) ?>" alt="Foto Barang" width="150" height="100"
                                   onerror="this.src='<?= base_url('path/to/transparent-image.png') ?>'; this.alt='Image Not Found';">
@@ -217,14 +216,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             <td>
                               <?= $p['nama_pegawai'] ?>
                             </td>
-                            <td>
+                            <td class="text-center">
                               <?php
                               $badgeClass = ($p['status'] == 'Diterima') ? 'badge-success' : 'badge-danger';
                               echo '<span class="badge ' . $badgeClass . '">' . $p['status'] . '</span>';
                               ?>
                             </td>
                             <td class="text-center">
-                              <a href="#" class="btn btn-warning mb-1">
+                              <a href="DaftarBarang/ubahBarang/<?= $p['id'] ?>" class="btn btn-warning mb-1">
                                 <i class="fas fa-pencil-alt mr-1"></i>Ubah
                               </a>
                               <a href="#" class="btn btn-danger">
@@ -238,27 +237,15 @@ scratch. This page gets rid of all links and provides the needed markup only.
                       ?>
                     </tbody>
                   </table>
-
                 </div>
                 <!-- /.card-body -->
               </div>
               <!-- /.card -->
-              <!-- /.row -->
             </div><!-- /.container-fluid -->
           </div>
           <!-- /.content -->
         </div>
         <!-- /.content-wrapper -->
-
-        <!-- Control Sidebar -->
-        <aside class="control-sidebar control-sidebar-dark">
-          <!-- Control sidebar content goes here -->
-          <div class="p-3">
-            <h5>Title</h5>
-            <p>Sidebar content</p>
-          </div>
-        </aside>
-        <!-- /.control-sidebar -->
 
         <!-- Main Footer -->
         <footer class="main-footer">
@@ -267,14 +254,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
             Anything you want
           </div>
           <!-- Default to the left -->
-          <strong>Copyright &copy; 2014-2021 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights
-          reserved.
+          <strong>Copyright &copy; 2014-2021 <a href="https://adminlte.io">AdminLTE.io</a>.</strong>
+          All rights reserved.
         </footer>
       </div>
       <!-- ./wrapper -->
 
       <!-- REQUIRED SCRIPTS -->
-
       <!-- jQuery -->
       <script src="../../plugins/jquery/jquery.min.js"></script>
       <!-- Bootstrap 4 -->
@@ -293,15 +279,26 @@ scratch. This page gets rid of all links and provides the needed markup only.
       <!-- Page specific script -->
       <!-- SweetAlert Error Modal -->
       <script>
-        <?php if (isset($errors) && !empty($errors)): ?>         Swal.fire({ icon: 'error', title: 'Oops...', html: '<?php echo implode("<br>", $errors); ?>', });
+        <?php if (isset($errors) && !empty($errors)): ?>
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            html: '<?php echo implode("<br>", $errors); ?>',
+          });
         <?php endif; ?>
       </script>
 
       <!-- SweetAlert Success Modal -->
       <script>
-        <?php if (session()->get('success')): ?>         Swal.fire({ icon: 'success', title: 'Success', text: <?php echo json_encode(session()->get('success')); ?>, });
+        <?php if (session()->get('success')): ?>
+          Swal.fire({
+            icon: 'success',
+            title: 'Success',
+            text: <?php echo json_encode(session()->get('success')); ?>,
+          });
         <?php endif; ?>
       </script>
+
       <script>
         $(function () {
           $('#tableBarang').DataTable({

@@ -9,7 +9,8 @@ class DaftarBarang extends BaseController
     public function index()
     {
         $model = new DataBarangM();
-        $data = $model->getTableBarangAll();
+        $search = $this->request->getGet('search');
+        $data = $model->getData($search);
         return view('penerimaan_barang', compact('data'));
     }
 
@@ -52,5 +53,32 @@ class DaftarBarang extends BaseController
         // Load the view with the form
         return view('inputbarang', compact('dataPegawai'));
     }
+    public function ubahBarang($id)
+    {
+        // Load the model
+        $model = new DataBarangM();
+        $dataPegawai = $model->getTablePegawai();
 
+        // Get existing data from the database
+        $barang = $model->getBarangById($id);
+
+        // Check if the form is submitted
+        if ($this->request->getMethod() === 'post') {
+            // Validate form data if needed
+
+            // Get form data
+            $data = [
+                'status' => $this->request->getPost('status'),
+            ];
+
+            // Update data in the database
+            $model->updateBarang($id, $data);
+
+            // Redirect to a success page or do something else
+            return redirect()->to('/DaftarBarang')->with('success', 'Status Barang Berhasil Diubah');
+        }
+
+        // Load the view with the form and existing data
+        return view('ubahbarang', ['dataPegawai' => $dataPegawai, 'barang' => $barang]);
+    }
 }
