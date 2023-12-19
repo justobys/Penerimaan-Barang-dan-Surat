@@ -186,12 +186,13 @@
                     </thead>
                     <tbody>
                       <?php
+                      $row = 1;
                       if (isset($data) && is_array($data)):
                         foreach ($data as $p):
                           ?>
                           <tr>
                             <td class="text-center">
-                              <?= $p['id'] ?>
+                              <?= $row++ ?>
                             </td>
                             <td class="text-center">
                               <?= date('d/m/Y', strtotime($p['tanggal'])); ?>
@@ -226,9 +227,9 @@
                               <a href="DaftarBarang/ubahBarang/<?= $p['id'] ?>" class="btn btn-warning mb-1">
                                 <i class="fas fa-pencil-alt mr-1"></i>Ubah
                               </a>
-                              <a href="#" class="btn btn-danger">
+                              <button href="#" class="btn btn-danger" onclick="confirmDelete(<?= $p['id'] ?>)">
                                 <i class="fas fa-trash mr-1"></i>Delete
-                              </a>
+                              </button>
                             </td>
                           </tr>
                           <?php
@@ -297,6 +298,25 @@
             text: <?php echo json_encode(session()->get('success')); ?>,
           });
         <?php endif; ?>
+      </script>
+
+      <!-- SweetAlert Delete -->
+      <script>
+        function confirmDelete(id) {
+          Swal.fire({
+            title: 'Apakah anda yakin akan menghapus data ini?',
+            text: "Anda tidak akan dapat mengembalikannya!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Hapus!'
+          }).then((result) => {
+            if (result.isConfirmed) {
+              window.location.href = "DaftarBarang/hapusBarang/" + id;
+            }
+          })
+        }
       </script>
 
       <script>

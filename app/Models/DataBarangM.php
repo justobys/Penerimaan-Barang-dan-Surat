@@ -73,5 +73,12 @@ class DataBarangM extends Model
         return $query->get()->getResultArray();
     }
 
+    public function deleteBarang($id)
+    {
+        return $this->db->table($this->table)
+            ->where('id', $id)
+            ->delete();
+    }
+
 }
 ?>

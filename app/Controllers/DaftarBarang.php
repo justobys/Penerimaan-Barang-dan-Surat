@@ -83,4 +83,11 @@ class DaftarBarang extends BaseController
         // Load the view with the form and existing data
         return view('ubahbarang', ['dataPegawai' => $dataPegawai, 'barang' => $barang]);
     }
+
+    public function hapusBarang($id)
+    {
+        $model = new DataBarangM();
+        $model->deleteBarang($id);
+        return redirect()->to('/DaftarBarang')->with('success', 'Data Barang Berhasil Dihapus');
+    }
 }
