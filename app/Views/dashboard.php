@@ -113,12 +113,20 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="<?= base_url('P_Surat') ?>" class="nav-link">
+                                    <a href="<?= base_url('DaftarSurat') ?>" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Penerimaan Surat</p>
                                     </a>
                                 </li>
                             </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a href="<?= base_url('Pegawai') ?>" class="nav-link">
+                                <i class="nav-icon fas fa-users"></i>
+                                <p>
+                                    Data Pegawai
+                                </p>
+                            </a>
                         </li>
                         <li class="nav-item">
                             <a href="<?php echo base_url('Login/logout'); ?>" class="nav-link">
