@@ -33,12 +33,12 @@ class Login extends BaseController
                 $session->set($ses_data);
 
                 // Redirect to the dashboard with success message
-                return redirect()->to('Dashboard')->with('success', 'Login Berhasil');
+                return redirect()->to('/Dashboard')->with('success', 'Login Berhasil');
             }
         }
 
         // If email or password is incorrect, redirect to login with error message
-        return redirect()->to('Login')->with('error', 'Password/email salah! Silahkan periksa kembali!');
+        return redirect()->to('/login')->with('error', 'Password/email salah! Silahkan periksa kembali!');
     }
 
     public function logout()

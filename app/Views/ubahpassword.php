@@ -161,11 +161,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <!-- Page specific script -->
         <!-- SweetAlert Error Modal -->
         <script>
-            <?php if (isset($errors) && !empty($errors)): ?>
+            <?php if (session()->get('errors')): ?>
                 Swal.fire({
                     icon: 'error',
                     title: 'Oops...',
-                    html: '<?php echo implode("<br>", $errors); ?>',
+                    text: <?php echo json_encode(session()->get('error')); ?>',
                 });
             <?php endif; ?>
         </script>

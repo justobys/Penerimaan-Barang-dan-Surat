@@ -42,7 +42,7 @@ class UbahPassword extends BaseController
                 return redirect()->to('Dashboard')->with('success', 'Password berhasil diubah');
             } else {
                 // Jika validasi gagal, tampilkan pesan error
-                return redirect()->back()->withInput()->with('errors', $validation->getErrors());
+                return redirect()->back()->with('errors', 'Password gagal diubah');
             }
         }
     }
