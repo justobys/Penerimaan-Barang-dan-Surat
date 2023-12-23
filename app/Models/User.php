@@ -7,7 +7,7 @@ use CodeIgniter\Model;
 class User extends Model
 {
     protected $table = 'tbl_user';
-    protected $allowedFields = ['username', 'email', 'password'];
+    protected $allowedFields = ['username', 'email', 'password', 'remember_token'];
 
     public function updatePassword($id, $hashedPassword)
     {

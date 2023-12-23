@@ -215,7 +215,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                     </div><!-- /.row -->
                                     <table id="tableBarang" class="table table-bordered table-hover">
                                         <thead>
-                                            <tr class="text-center">
+                                            <tr>
                                                 <th>ID</th>
                                                 <th>Tanggal</th>
                                                 <th>No. Resi</th>
@@ -231,22 +231,22 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                                 foreach ($data as $p):
                                                     ?>
                                                     <tr>
-                                                        <td class="text-center">
+                                                        <td>
                                                             <?= $row++ ?>
                                                         </td>
-                                                        <td class="text-center">
+                                                        <td>
                                                             <?= date('d/m/Y', strtotime($p['tanggal'])); ?>
                                                         </td>
-                                                        <td class="text-center">
+                                                        <td>
                                                             <?= $p['no_resi'] ?>
                                                         </td>
-                                                        <td class="text-center">
+                                                        <td>
                                                             <?= $p['nama_barang'] ?>
                                                         </td>
                                                         <td>
                                                             <?= $p['nama_pegawai'] ?>
                                                         </td>
-                                                        <td class="text-center">
+                                                        <td>
                                                             <?php if ($p['status'] == 'Diterima') {
                                                                 echo '<span class="badge badge-success">Diterima</span>';
                                                             } else {

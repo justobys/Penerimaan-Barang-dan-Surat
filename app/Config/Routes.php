@@ -32,9 +32,10 @@ $routes->get('/DaftarBarang/hapusBarang/(:any)', 'DaftarBarang::hapusBarang/$1')
 
 // Data Pegawai
 $routes->get('/Pegawai', 'Pegawai::index');
-$routes->get('/Pegawai/tambahPegawai', 'Pegawai::tambahPegawai');
+$routes->get('/Pegawai/tambah', 'Pegawai::tambah');
+$routes->post('/Pegawai/tambah', 'Pegawai::tambah');
 $routes->get('/Pegawai/edit/(:any)', 'Pegawai::edit/$1');
 $routes->post('/Pegawai/edit/(:any)', 'Pegawai::edit/$1');
-$routes->get('/Pegawai/hapusPegawai/(:any)', 'Pegawai::hapusPegawai/$1');
+$routes->get('/Pegawai/hapus/(:any)', 'Pegawai::hapus/$1');
 
 // $routes->setAutoRoute(true);

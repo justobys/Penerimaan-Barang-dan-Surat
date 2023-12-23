@@ -37,7 +37,7 @@ class Filters extends BaseConfig
      */
     public array $globals = [
         'before' => [
-            'auth' => ['except' => ['login']],
+            // 'auth' => ['except' => ['login']],
         ],
         'after' => [
             //

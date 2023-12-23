@@ -166,21 +166,39 @@
               <div class="card">
                 <div class="card-header">
                   <a href="<?= base_url('DaftarBarang/tambahBarang') ?>" class="btn btn-primary"><i
-                      class="fas fa-plus"></i>
-                    Tambah</a>
+                      class="fas fa-plus"></i> Tambah</a>
                   <div class="float-right ml-4">
                     <form action="<?= base_url('DaftarBarang') ?>" method="get" class="form-inline">
-                      <input type="search" name="search" class="form-control col-auto ml-auto mr-1"
-                        placeholder="Search">
-                      <input type="date" name="date" class="form-control col-auto ml-auto mr-1" placeholder="Date">
-                      <button type="submit" class="btn btn-success ml-auto">Search</button>
+                      <div class="input-group">
+                        <input type="search" name="search" class="form-control" placeholder="Search">
+                      </div>
+                      <div class="input-group ml-2">
+                        <select name="status" class="form-control">
+                          <option value="">All</option>
+                          <option value="received">Diterima</option>
+                          <option value="not_received">Belum Diterima</option>
+                        </select>
+                      </div>
+                      <div class="input-group ml-2">
+                        <input type="date" name="StartDate" class="form-control" placeholder="Start Date"
+                          aria-label="Start Date">
+                        <div class="input-group-append">
+                          <span class="input-group-text bg-secondary px-2">s/d</span>
+                        </div>
+                        <input type="date" name="EndDate" class="form-control" placeholder="End Date"
+                          aria-label="End Date">
+                        <div class="input-group-append">
+                          <button type="submit" class="btn btn-success">Search</button>
+                        </div>
+                      </div>
                     </form>
                   </div>
                 </div>
                 <!-- /.card-header -->
+
                 <div class="card-body">
                   <table id="tableBarang" class="table table-bordered table-hover">
-                    <thead class="text-center">
+                    <thead>
                       <tr>
                         <th>ID</th>
                         <th>Tanggal</th>
@@ -200,22 +218,22 @@
                         foreach ($data as $p):
                           ?>
                           <tr>
-                            <td class="text-center">
+                            <td>
                               <?= $row++ ?>
                             </td>
-                            <td class="text-center">
+                            <td>
                               <?= date('d/m/Y', strtotime($p['tanggal'])); ?>
                             </td>
-                            <td class="text-center">
+                            <td>
                               <?= $p['no_resi'] ?>
                             </td>
-                            <td class="text-center">
+                            <td>
                               <?= $p['nama_barang'] ?>
                             </td>
                             <td>
                               <?= $p['deskripsi'] ?>
                             </td>
-                            <td class="text-center">
+                            <td>
                               <?php if (!empty($p['foto_barang'])): ?>
                                 <img src="<?= base_url($p['foto_barang']) ?>" alt="Foto Barang" width="150" height="100"
                                   onerror="this.src='<?= base_url('path/to/transparent-image.png') ?>'; this.alt='Image Not Found';">
@@ -226,7 +244,7 @@
                             <td>
                               <?= $p['nama_pegawai'] ?>
                             </td>
-                            <td class="text-center">
+                            <td>
                               <?php
                               $badgeClass = ($p['status'] == 'Diterima') ? 'badge-success' : 'badge-danger';
                               echo '<span class="badge ' . $badgeClass . '">' . $p['status'] . '</span>';

@@ -54,7 +54,7 @@ class DataBarangM extends Model
         return $this->find($id);
     }
 
-    public function getData($search, $date)
+    public function getData($search, $start_date, $end_date, $status)
     {
         $query = $this->db->table($this->table)
             ->select('tbl_penerimaan_barang.*, tbl_pegawai.nama_pegawai')
@@ -66,12 +66,21 @@ class DataBarangM extends Model
             $query->orLike('tbl_pegawai.nama_pegawai', $search);
         }
 
-        if (!empty($date)) {
-            $query->like('tbl_penerimaan_barang.tanggal', $date);
+        if (!empty($start_date) && !empty($end_date)) {
+            $query->where('tbl_penerimaan_barang.tanggal >=', $start_date);
+            $query->where('tbl_penerimaan_barang.tanggal <=', $end_date);
         }
 
+        if (!empty($status)) {
+            if ($status == 'received') {
+                $query->where('tbl_penerimaan_barang.status', 'Diterima');
+            } elseif ($status == 'not_received') {
+                $query->where('tbl_penerimaan_barang.status', 'Belum Diterima');
+            }
+        }
         return $query->get()->getResultArray();
     }
+
 
     public function deleteBarang($id)
     {

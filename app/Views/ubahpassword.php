@@ -79,7 +79,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             <div class="card">
                                 <!-- Card Header -->
                                 <div class="card-header">
-                                    <form action="<?= base_url('UbahPassword/ubah') ?>" method="post">
+                                    <form action="<?= base_url('UbahPassword/ubah') ?>" method="post"
+                                        id="ubahPasswordForm">
                                         <div class="form-group">
                                             <label for="email">Email</label>
                                             <div class="input-group mb-3">
@@ -117,9 +118,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                             </div>
                                         </div>
                                         <div class="d-flex justify-content-start">
-                                            <a href="<?= base_url('Dashboard/index') ?>"
-                                                class="btn btn-danger mr-5"><span class="fas fa-times"></span>
-                                                Batal</a>
+                                            <button type="button" class="btn btn-danger mr-auto col-auto"
+                                                onclick="window.location.href='<?= base_url('Dashboard') ?>'">Batal</button>
                                             <button type="submit" class="btn btn-primary"><span
                                                     class="fas fa-edit"></span>
                                                 Ubah
@@ -166,7 +166,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     icon: 'error',
                     title: 'Oops...',
                     text: <?php echo json_encode(session()->get('error')); ?>',
-                });
+                                    });
             <?php endif; ?>
         </script>
 
@@ -179,6 +179,38 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     text: 'Password berhasil diubah!',
                 });
             <?php endif; ?>
+        </script>
+
+        <!-- Password validation -->
+        <script>
+            $(document).ready(function () {
+                $('#ubahPasswordForm').submit(function () {
+                    const password = $('#password').val();
+                    const passwordConfirm = $('#password_confirm').val();
+
+                    // Validasi panjang password dan kecocokan password dan konfirmasi
+                    if (password.length < 6) {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops...',
+                            text: 'Password harus terdiri dari setidaknya 6 karakter.',
+                        });
+                        return false;
+                    }
+
+                    if (password !== passwordConfirm) {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops...',
+                            text: 'Password dan konfirmasi password tidak cocok.',
+                        });
+                        return false;
+                    }
+
+                    // Lanjutkan dengan mengirim formulir jika validasi berhasil
+                    return true;
+                });
+            });
         </script>
 
         <!-- Skrip JavaScript untuk toggle password -->

@@ -128,8 +128,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                                         <option value="Diterima">Diterima</option>
                                                     </select>
                                                     <div class="mt-2 ml-2">
-                                                        <button type="button"
-                                                            class="btn btn-danger mr-auto col-auto">Batal</button>
+                                                        <button type="button" class="btn btn-danger mr-auto col-auto"
+                                                            onclick="window.location.href='<?= base_url('DaftarBarang') ?>'">Batal</button>
                                                         <button type="submit"
                                                             class="btn btn-primary ml-auto col-auto">Simpan</button>
                                                     </div>

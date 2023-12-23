@@ -188,12 +188,12 @@
                                 <!-- /.card-header -->
                                 <div class="card-body">
                                     <table id="tableBarang" class="table table-bordered table-hover">
-                                        <thead class="text-center">
+                                        <thead>
                                             <tr>
-                                                <th>ID Pegawai</th>
+                                                <th width="9%">ID Pegawai</th>
                                                 <th>Nama Pegawai</th>
                                                 <th>Email</th>
-                                                <th>Aksi</th>
+                                                <th width="15%">Aksi</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -203,25 +203,28 @@
                                                 foreach ($data as $p):
                                                     ?>
                                                     <tr>
-                                                        <td class="text-center">
+                                                        <td>
                                                             <?= $row++ ?>
                                                         </td>
-                                                        <td class="text-center">
+                                                        <td>
                                                             <?= $p['nama_pegawai'] ?>
                                                         </td>
-                                                        <td class="text-center">
+                                                        <td>
                                                             <?= $p['email'] ?>
                                                         </td>
                                                         <td class="text-center">
-                                                            <a href="Pegawai/edit/<?= $p['id_pegawai'] ?>"
-                                                                class="btn btn-warning mb-1">
-                                                                <i class="fas fa-pencil-alt mr-1"></i>Ubah
-                                                            </a>
-                                                            <button href="#" class="btn btn-danger"
-                                                                onclick="confirmDelete(<?= $p['id_pegawai'] ?>)">
-                                                                <i class="fas fa-trash mr-1"></i>Delete
-                                                            </button>
+                                                            <div class="btn-group">
+                                                                <a href="Pegawai/edit/<?= $p['id_pegawai'] ?>"
+                                                                    class="btn btn-warning mr-2">
+                                                                    <i class="fas fa-pencil-alt"></i> Ubah
+                                                                </a>
+                                                                <button href="#" class="btn btn-danger"
+                                                                    onclick="confirmDelete(<?= $p['id_pegawai'] ?>)">
+                                                                    <i class="fas fa-trash"></i> Delete
+                                                                </button>
+                                                            </div>
                                                         </td>
+
                                                     </tr>
                                                     <?php
                                                 endforeach;
@@ -229,6 +232,7 @@
                                             ?>
                                         </tbody>
                                     </table>
+
                                 </div>
                                 <!-- /.card-body -->
                             </div>
