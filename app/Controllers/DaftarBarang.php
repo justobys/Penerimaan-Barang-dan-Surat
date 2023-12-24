@@ -25,11 +25,8 @@ class DaftarBarang extends BaseController
         $model = new DataBarangM();
         $dataPegawai = $model->getTablePegawai();
 
-        // Check if the form is submitted
+        // Mengecek apakah formnya terisi
         if ($this->request->getMethod() === 'post') {
-            // Validate form data if needed
-
-            // Get form data
             $data = [
                 'no_resi' => $this->request->getPost('no_resi'),
                 'nama_barang' => $this->request->getPost('nama_barang'),
@@ -44,18 +41,16 @@ class DaftarBarang extends BaseController
                 $newName = $foto_barang->getRandomName();
                 $foto_barang->move(ROOTPATH . 'public/uploads', $newName);
 
-                // Save the file path in the database
+                // Menyimpan file ke database
                 $data['foto_barang'] = 'uploads/' . $newName;
             }
 
-            // Insert data into the database
+            // Memasukkan data ke dalam database
             $model->insertBarang($data);
 
-            // Redirect to a success page or do something else
             return redirect()->to('/DaftarBarang')->with('success', 'Data Barang Berhasil Dimasukkan');
         }
 
-        // Load the view with the form
         return view('inputbarang', compact('dataPegawai'));
     }
     public function ubahBarang($id)
@@ -64,26 +59,16 @@ class DaftarBarang extends BaseController
         $model = new DataBarangM();
         $dataPegawai = $model->getTablePegawai();
 
-        // Get existing data from the database
+        // Mengambil data dari database
         $barang = $model->getBarangById($id);
 
-        // Check if the form is submitted
         if ($this->request->getMethod() === 'post') {
-            // Validate form data if needed
-
-            // Get form data
             $data = [
                 'status' => $this->request->getPost('status'),
             ];
-
-            // Update data in the database
             $model->updateBarang($id, $data);
-
-            // Redirect to a success page or do something else
             return redirect()->to('/DaftarBarang')->with('success', 'Status Barang Berhasil Diubah');
         }
-
-        // Load the view with the form and existing data
         return view('ubahbarang', ['dataPegawai' => $dataPegawai, 'barang' => $barang]);
     }
 

@@ -35,7 +35,7 @@ class Pegawai extends BaseController
     public function edit($idpegawai)
     {
         $model = new PegawaiM;
-        $dataPegawai = $model->getPegawaiById($idpegawai); // Adjust this line to fetch specific data
+        $dataPegawai = $model->getPegawaiById($idpegawai);
 
         if ($this->request->getMethod() === 'post') {
             $data = [
