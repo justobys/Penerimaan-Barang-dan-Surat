@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Models\DataBarangM;
+use App\Models\PegawaiM;
 
 class DaftarBarang extends BaseController
 {
@@ -78,4 +79,41 @@ class DaftarBarang extends BaseController
         $model->deleteBarang($id);
         return redirect()->to('/DaftarBarang')->with('success', 'Data Barang Berhasil Dihapus');
     }
+
+    public function sendEmailNotification($id, $type)
+    {
+        // Ambil informasi barang dari database
+        $modelBarang = new DataBarangM();
+        $barang = $modelBarang->getBarangById($id);
+
+        // Ambil informasi pegawai dari database
+        $modelPegawai = new PegawaiM(); // Ganti dengan model pegawai yang sesuai
+        $pegawai = $modelPegawai->getPegawaiById($barang['id_pegawai']);
+
+        // Kirim email notifikasi
+        $email = \Config\Services::email();
+        $email->setTo($pegawai['email']);
+        $email->setSubject('Notifikasi Barang Masuk');
+
+        if ($type === 'surat') {
+            $message = "Surat dengan nomor {$barang['no_resi']} telah diterima.";
+        } elseif ($type === 'barang') {
+            $message = "Barang dengan nomor {$barang['no_resi']} telah diterima.";
+        } else {
+            // Jenis notifikasi tidak valid
+            echo json_encode(['status' => 'error', 'message' => 'Jenis notifikasi tidak valid.']);
+            return;
+        }
+
+        $email->setMessage($message);
+
+        if ($email->send()) {
+            // Email terkirim
+            echo json_encode(['status' => 'success', 'message' => 'Email notifikasi berhasil dikirim.']);
+        } else {
+            // Gagal mengirim email
+            echo json_encode(['status' => 'error', 'message' => 'Gagal mengirim email notifikasi.']);
+        }
+    }
+
 }

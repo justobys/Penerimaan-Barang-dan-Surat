@@ -225,11 +225,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <?php
-                                            $row = 1;
-                                            if (isset($data) && is_array($data)):
-                                                foreach ($data as $p):
-                                                    ?>
+                                            <?php if (!empty($tbl_penerimaan_barang)): ?>
+                                                <?php $row = 1; ?>
+                                                <?php foreach ($tbl_penerimaan_barang as $p): ?>
                                                     <tr>
                                                         <td>
                                                             <?= $row++ ?>
@@ -247,157 +245,163 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                                             <?= $p['nama_pegawai'] ?>
                                                         </td>
                                                         <td>
-                                                            <?php if ($p['status'] == 'Diterima') {
-                                                                echo '<span class="badge badge-success">Diterima</span>';
-                                                            } else {
-                                                                echo '<span class="badge badge-danger">Belum Diterima</span>';
-                                                            }
-                                                            ?>
+                                                            <?php if ($p['status'] == 'Diterima'): ?>
+                                                                <span class="badge badge-success">Diterima</span>
+                                                            <?php else: ?>
+                                                                <span class="badge badge-danger">Belum Diterima</span>
+                                                            <?php endif; ?>
                                                         </td>
                                                     </tr>
-                                                    <?php
-                                                endforeach;
-                                            endif;
-                                            ?>
+                                                <?php endforeach; ?>
+                                            <?php endif; ?>
                                         </tbody>
                                     </table>
                                 </div>
                             </div>
                             <!-- /.Penerimaan Barang -->
-                        </div>
-                    </div>
 
-                    <!-- Penerimaan Surat -->
-                    <div class="card">
-                        <!-- /.Card Header -->
-                        <div class="card-body">
-                            <div class="row mb-2">
-                                <div class="col-sm-6">
-                                    <h4 class="m-0">Table Penerimaan Surat Terbaru</h1>
+                            <!-- Penerimaan Surat -->
+                            <div class="card">
+                                <!-- /.Card Header -->
+                                <div class="card-body">
+                                    <div class="row mb-2">
+                                        <div class="col-sm-6">
+                                            <h4 class="m-0">Table Penerimaan Surat Terbaru</h1>
+                                        </div>
+                                    </div><!-- /.row -->
+                                    <table id="tableSurat" class="table table-bordered table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>ID</th>
+                                                <th>Tanggal</th>
+                                                <th>No. Surat</th>
+                                                <th>Nama Surat</th>
+                                                <th>Penerima</th>
+                                                <th>Status</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <?php if (!empty($tbl_penerimaan_surat)): ?>
+                                                <?php $row = 1; ?>
+                                                <?php foreach ($tbl_penerimaan_surat as $p): ?>
+                                                    <tr>
+                                                        <td>
+                                                            <?= $row++ ?>
+                                                        </td>
+                                                        <td>
+                                                            <?= date('d/m/Y', strtotime($p['tanggal'])); ?>
+                                                        </td>
+                                                        <td>
+                                                            <?= $p['no_surat'] ?>
+                                                        </td>
+                                                        <td>
+                                                            <?= $p['nama_surat'] ?>
+                                                        </td>
+                                                        <td>
+                                                            <?= $p['nama_pegawai'] ?>
+                                                        </td>
+                                                        <td>
+                                                            <?php if ($p['status'] == 'Diterima'): ?>
+                                                                <span class="badge badge-success">Diterima</span>
+                                                            <?php else: ?>
+                                                                <span class="badge badge-danger">Belum Diterima</span>
+                                                            <?php endif; ?>
+                                                        </td>
+                                                    </tr>
+                                                <?php endforeach; ?>
+                                            <?php endif; ?>
+                                        </tbody>
+                                    </table>
                                 </div>
-                            </div><!-- /.row -->
-                            <table id="tableSurat" class="table table-bordered table-hover">
-                                <thead>
-                                    <tr>
-                                        <th>Rendering engine</th>
-                                        <th>Browser</th>
-                                        <th>Platform(s)</th>
-                                        <th>Engine version</th>
-                                        <th>CSS grade</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>Trident</td>
-                                        <td>Internet
-                                            Explorer 4.0
-                                        </td>
-                                        <td>Win 95+</td>
-                                        <td> 4</td>
-                                        <td>X</td>
-                                    </tr>
-
-                                </tbody>
-                                <tfoot>
-                                    <tr>
-                                        <th>Rendering engine</th>
-                                        <th>Browser</th>
-                                        <th>Platform(s)</th>
-                                        <th>Engine version</th>
-                                        <th>CSS grade</th>
-                                    </tr>
-                                </tfoot>
-                            </table>
+                            </div>
+                            <!-- /.Penerimaan Surat -->
                         </div>
                     </div>
-
                 </div>
+                <!-- /.content -->
+
+                <!-- Main Footer -->
+                <footer class="main-footer">
+                    <!-- To the right -->
+                    <div class="float-right d-none d-sm-inline">
+                        Anything you want
+                    </div>
+                    <!-- Default to the left -->
+                    <strong>Copyright &copy; 2014-2021 <a href="https://adminlte.io">AdminLTE.io</a>.</strong>
+                    All rights
+                    reserved.
+                </footer>
             </div>
-        </div>
-        <!-- /.content -->
+            <!-- ./wrapper -->
 
-        <!-- Main Footer -->
-        <footer class="main-footer">
-            <!-- To the right -->
-            <div class="float-right d-none d-sm-inline">
-                Anything you want
-            </div>
-            <!-- Default to the left -->
-            <strong>Copyright &copy; 2014-2021 <a href="https://adminlte.io">AdminLTE.io</a>.</strong>
-            All rights
-            reserved.
-        </footer>
-    </div>
-    <!-- ./wrapper -->
+            <!-- REQUIRED SCRIPTS -->
 
-    <!-- REQUIRED SCRIPTS -->
+            <!-- jQuery -->
+            <script src="../../plugins/jquery/jquery.min.js"></script>
+            <!-- Bootstrap 4 -->
+            <script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+            <!-- DataTables  & Plugins -->
+            <script src="../../plugins/datatables/jquery.dataTables.min.js"></script>
+            <script src="../../plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+            <script src="../../plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+            <script src="../../plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+            <script src="../../plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+            <script src="../../plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+            <!-- AdminLTE App -->
+            <script src="../../dist/js/adminlte.min.js"></script>
+            <!-- Sweet Alert -->
+            <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+            <!-- Page specific script -->
+            <!-- SweetAlert Error Modal -->
+            <script>
+                <?php if (isset($errors) && !empty($errors)): ?>
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        html: '<?php echo implode("<br>", $errors); ?>',
+                    });
+                <?php endif; ?>
+            </script>
 
-    <!-- jQuery -->
-    <script src="../../plugins/jquery/jquery.min.js"></script>
-    <!-- Bootstrap 4 -->
-    <script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <!-- DataTables  & Plugins -->
-    <script src="../../plugins/datatables/jquery.dataTables.min.js"></script>
-    <script src="../../plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
-    <script src="../../plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
-    <script src="../../plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
-    <script src="../../plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
-    <script src="../../plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
-    <!-- AdminLTE App -->
-    <script src="../../dist/js/adminlte.min.js"></script>
-    <!-- Sweet Alert -->
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <!-- Page specific script -->
-    <!-- SweetAlert Error Modal -->
-    <script>
-        <?php if (isset($errors) && !empty($errors)): ?>
-            Swal.fire({
-                icon: 'error',
-                title: 'Oops...',
-                html: '<?php echo implode("<br>", $errors); ?>',
-            });
-        <?php endif; ?>
-    </script>
+            <!-- SweetAlert Success Modal -->
+            <script>
+                <?php if (session()->get('success')): ?>
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Success',
+                        text: <?php echo json_encode(session()->get('success')); ?>,
+                    });
+                <?php endif; ?>
+            </script>
 
-    <!-- SweetAlert Success Modal -->
-    <script>
-        <?php if (session()->get('success')): ?>
-            Swal.fire({
-                icon: 'success',
-                title: 'Success',
-                text: <?php echo json_encode(session()->get('success')); ?>,
-            });
-        <?php endif; ?>
-    </script>
-
-    <!-- Table Barang -->
-    <script>
-        $(function () {
-            $('#tableBarang').DataTable({
-                "paging": false,
-                "lengthChange": false,
-                "searching": false,
-                "ordering": false,
-                "info": true,
-                "autoWidth": false,
-                "responsive": true,
-            });
-        });
-    </script>
-    <!-- Table Surat -->
-    <script>
-        $(function () {
-            $('#tableSurat').DataTable({
-                "paging": true,
-                "lengthChange": false,
-                "searching": false,
-                "ordering": true,
-                "info": true,
-                "autoWidth": false,
-                "responsive": true,
-            });
-        });
-    </script>
+            <!-- Table Barang -->
+            <script>
+                $(function () {
+                    $('#tableBarang').DataTable({
+                        "paging": false,
+                        "lengthChange": false,
+                        "searching": false,
+                        "ordering": false,
+                        "info": true,
+                        "autoWidth": false,
+                        "responsive": true,
+                    });
+                });
+            </script>
+            <!-- Table Surat -->
+            <script>
+                $(function () {
+                    $('#tableSurat').DataTable({
+                        "paging": true,
+                        "lengthChange": false,
+                        "searching": false,
+                        "ordering": true,
+                        "info": true,
+                        "autoWidth": false,
+                        "responsive": true,
+                    });
+                });
+            </script>
 </body>
 
 </html>

@@ -254,8 +254,12 @@
                               <a href="DaftarBarang/ubahBarang/<?= $p['id'] ?>" class="btn btn-warning mb-1">
                                 <i class="fas fa-pencil-alt mr-1"></i>Ubah
                               </a>
-                              <button href="#" class="btn btn-danger" onclick="confirmDelete(<?= $p['id'] ?>)">
+                              <button class="btn btn-danger mb-1" onclick="confirmDelete(<?= $p['id'] ?>)">
                                 <i class="fas fa-trash mr-1"></i>Delete
+                              </button>
+                              <button class="btn btn-primary" data-id="<?= $p['id'] ?>" data-type="barang"
+                                onclick="sendEmailNotification(this)">
+                                <i class="fas fa-paper-plane mr-1"></i>Send Email
                               </button>
                             </td>
                           </tr>
@@ -358,6 +362,41 @@
             "responsive": true,
           });
         });
+      </script>
+
+      <script>
+        function sendEmailNotification(button) {
+          var id = $(button).data('id');
+          var type = $(button).data('type');
+
+          $.ajax({
+            type: 'POST',
+            url: '<?= base_url("DaftarBarang/sendEmailNotification") ?>/' + id + '/' + type,
+            success: function (response) {
+              var result = JSON.parse(response);
+              if (result.status === 'success') {
+                Swal.fire({
+                  icon: 'success',
+                  title: 'Notifikasi Terkirim',
+                  text: result.message,
+                });
+              } else {
+                Swal.fire({
+                  icon: 'error',
+                  title: 'Gagal',
+                  text: result.message,
+                });
+              }
+            },
+            error: function () {
+              Swal.fire({
+                icon: 'error',
+                title: 'Gagal',
+                text: 'Terjadi kesalahan saat mengirim notifikasi.',
+              });
+            }
+          });
+        }
       </script>
 </body>
 
