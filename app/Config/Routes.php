@@ -50,6 +50,6 @@ $routes->get('/Pegawai/hapus/(:any)', 'Pegawai::hapus/$1');
 
 // Send Email
 $routes->post('DaftarBarang/sendEmailNotification/(:segment)/(:segment)', 'DaftarBarang::sendEmailNotification/$1/$2');
-
+$routes->post('DaftarSurat/sendEmailNotification/(:segment)/(:segment)', 'DaftarSurat::sendEmailNotification/$1/$2');
 
 // $routes->setAutoRoute(true);

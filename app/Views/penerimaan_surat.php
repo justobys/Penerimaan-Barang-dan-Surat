@@ -371,7 +371,7 @@
 
           $.ajax({
             type: 'POST',
-            url: '<?= base_url("DaftarBarang/sendEmailNotification") ?>/' + id + '/' + type,
+            url: '<?= base_url("DaftarSurat/sendEmailNotification") ?>/' + id + '/' + type,
             success: function (response) {
               var result = JSON.parse(response);
               if (result.status === 'success') {
