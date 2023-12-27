@@ -61,7 +61,7 @@ class DataSuratM extends Model
             ->join('tbl_pegawai', 'tbl_pegawai.id_pegawai = tbl_penerimaan_surat.id_pegawai', 'left');
 
         if (!empty($search)) {
-            $query->like('tbl_penerimaan_surat.no_resi', $search);
+            $query->like('tbl_penerimaan_surat.no_surat', $search);
             $query->orLike('tbl_penerimaan_surat.nama_surat', $search);
             $query->orLike('tbl_pegawai.nama_pegawai', $search);
         }
