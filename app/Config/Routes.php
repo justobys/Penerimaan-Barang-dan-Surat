@@ -10,7 +10,7 @@ $routes->get('/', 'Home::index');
 // Login Function
 $routes->get('/login', 'Login::index');
 $routes->post('/Login/auth', 'Login::auth');
-$routes->get('/Login/logout', 'Login::logout');
+$routes->get('/Login/logout', 'Logbin::logout');
 
 // UbahPassword Function
 $routes->get('/UbahPassword', 'UbahPassword::index');
@@ -19,6 +19,7 @@ $routes->post('/UbahPassword/ubah', 'UbahPassword::ubah');
 // Dashboard Function
 $routes->get('/dashboard', 'Dashboard::index');
 $routes->get('/Dashboard', 'Dashboard::index');
+$routes->get('/Dashboard/chartDataBarang', 'Dashboard::chartDataBarang');
 
 // DaftarBarang
 $routes->get('/DaftarBarang', 'DaftarBarang::index');
@@ -29,6 +30,9 @@ $routes->get('/DaftarBarang/ubahBarang/(:any)', 'DaftarBarang::ubahBarang/$1');
 $routes->post('/DaftarBarang/ubahbarang/(:any)', 'DaftarBarang::ubahBarang/$1');
 
 $routes->get('/DaftarBarang/hapusBarang/(:any)', 'DaftarBarang::hapusBarang/$1');
+
+$routes->get('/DaftarBarang/export', 'DaftarBarang::export');
+$routes->get('/DaftarBarang/exportpdf', 'DaftarBarang::exportpdf');
 
 // DaftarSurat
 $routes->get('/DaftarSurat', 'DaftarSurat::index');
@@ -47,6 +51,8 @@ $routes->post('/Pegawai/tambah', 'Pegawai::tambah');
 $routes->get('/Pegawai/edit/(:any)', 'Pegawai::edit/$1');
 $routes->post('/Pegawai/edit/(:any)', 'Pegawai::edit/$1');
 $routes->get('/Pegawai/hapus/(:any)', 'Pegawai::hapus/$1');
+$routes->get('/Pegawai/export', 'Pegawai::export');
+$routes->get('/Pegawai/exportpdf', 'Pegawai::exportpdf');
 
 // Send Email
 $routes->post('DaftarBarang/sendEmailNotification/(:segment)/(:segment)', 'DaftarBarang::sendEmailNotification/$1/$2');

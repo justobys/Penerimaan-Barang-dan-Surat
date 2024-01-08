@@ -166,7 +166,10 @@
               <div class="card">
                 <div class="card-header">
                   <a href="<?= base_url('DaftarBarang/tambahBarang') ?>" class="btn btn-primary"><i
-                      class="fas fa-plus"></i> Tambah</a>
+                      class="fas fa-plus"></i></a>
+                  <button class="btn btn-warning" onclick="ExportData()">
+                    <i class="fas fa-file-export"></i>
+                  </button>
                   <div class="float-right ml-4">
                     <form action="<?= base_url('DaftarBarang') ?>" method="get" class="form-inline">
                       <div class="input-group">
@@ -188,7 +191,7 @@
                         <input type="date" name="EndDate" class="form-control" placeholder="End Date"
                           aria-label="End Date">
                         <div class="input-group-append">
-                          <button type="submit" class="btn btn-success">Search</button>
+                          <button type="submit" class="btn btn-success"><i class="fas fa-search"></i></button>
                         </div>
                       </div>
                     </form>
@@ -257,10 +260,10 @@
                               <button class="btn btn-danger mb-1" onclick="confirmDelete(<?= $p['id'] ?>)">
                                 <i class="fas fa-trash mr-1"></i>Delete
                               </button>
-                              <button class="btn btn-primary" data-id="<?= $p['id'] ?>" data-type="barang"
+                              <!-- <button class="btn btn-primary" data-id="<?= $p['id'] ?>" data-type="barang"
                                 onclick="sendEmailNotification(this)">
                                 <i class="fas fa-paper-plane mr-1"></i>Send Email
-                              </button>
+                              </button> -->
                             </td>
                           </tr>
                           <?php
@@ -350,6 +353,28 @@
         }
       </script>
 
+      <!-- Export Data -->
+      <script>
+        function ExportData() {
+          Swal.fire({
+            title: 'Export Data',
+            text: 'Silakan pilih format ekspor:',
+            showCancelButton: true,
+            confirmButtonColor: '#288421',
+            cancelButtonColor: '#3085d6',
+            confirmButtonText: '<i class="fas fa-file-excel"></i> Excel',
+            cancelButtonText: '<i class="fas fa-file-pdf"></i> PDF',
+            showCloseButton: true
+          }).then((result) => {
+            if (result.isConfirmed) {
+              window.location.href = "<?= base_url('DaftarBarang/export'); ?>";
+            } else if (result.dismiss === Swal.DismissReason.cancel) {
+              window.location.href = "<?= base_url('DaftarBarang/exportpdf'); ?>";
+            }
+          });
+        }
+      </script>
+
       <script>
         $(function () {
           $('#tableBarang').DataTable({
@@ -364,7 +389,7 @@
         });
       </script>
 
-      <script>
+      <!-- <script>
         function sendEmailNotification(button) {
           var id = $(button).data('id');
           var type = $(button).data('type');
@@ -397,7 +422,7 @@
             }
           });
         }
-      </script>
+      </script> -->
 </body>
 
 </html>

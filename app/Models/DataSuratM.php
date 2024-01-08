@@ -89,5 +89,12 @@ class DataSuratM extends Model
             ->delete();
     }
 
+    // Menghitung Jumlah data
+    public function getTotalSurat()
+    {
+        $query = $this->db->table('tbl_penerimaan_surat')->get();
+        $result = $query->getResult();
+        return count($result);
+    }
 }
 ?>

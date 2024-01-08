@@ -44,6 +44,7 @@ class DataBarangM extends Model
 
     public function updateBarang($id, array $data)
     {
+        $data['tanggal'] = date('Y-m-d H:i:s');
         return $this->db->table($this->table)
             ->where('id', $id)
             ->update($data);
@@ -89,5 +90,12 @@ class DataBarangM extends Model
             ->delete();
     }
 
+    // Menghitung Total Barang
+    public function getTotalBarang()
+    {
+        $query = $this->db->table('tbl_penerimaan_barang')->get();
+        $result = $query->getResult();
+        return count($result);
+    }
 }
 ?>

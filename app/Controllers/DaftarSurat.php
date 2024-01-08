@@ -78,39 +78,39 @@ class DaftarSurat extends BaseController
         return redirect()->to('/DaftarSurat')->with('success', 'Data Surat Berhasil Dihapus');
     }
 
-    public function sendEmailNotification($id, $type)
-    {
-        // Ambil informasi barang dari database
-        $modelBarang = new DataSuratM();
-        $surat = $modelBarang->getBarangById($id);
+    // public function sendEmailNotification($id, $type)
+    // {
+    //     // Ambil informasi barang dari database
+    //     $modelBarang = new DataSuratM();
+    //     $surat = $modelBarang->getBarangById($id);
 
-        // Ambil informasi pegawai dari database
-        $modelPegawai = new PegawaiM(); // Ganti dengan model pegawai yang sesuai
-        $pegawai = $modelPegawai->getPegawaiById($surat['id_pegawai']);
+    //     // Ambil informasi pegawai dari database
+    //     $modelPegawai = new PegawaiM(); // Ganti dengan model pegawai yang sesuai
+    //     $pegawai = $modelPegawai->getPegawaiById($surat['id_pegawai']);
 
-        // Kirim email notifikasi
-        $email = \Config\Services::email();
-        $email->setTo($pegawai['email']);
-        $email->setSubject('Notifikasi Barang Masuk');
+    //     // Kirim email notifikasi
+    //     $email = \Config\Services::email();
+    //     $email->setTo($pegawai['email']);
+    //     $email->setSubject('Notifikasi Barang Masuk');
 
-        if ($type === 'surat') {
-            $message = "Surat dengan nomor {$surat['no_surat']} telah diterima.";
-        } elseif ($type === 'barang') {
-            $message = "Barang dengan nomor {$surat['no_surat']} telah diterima.";
-        } else {
-            // Jenis notifikasi tidak valid
-            echo json_encode(['status' => 'error', 'message' => 'Jenis notifikasi tidak valid.']);
-            return;
-        }
+    //     if ($type === 'surat') {
+    //         $message = "Surat dengan nomor {$surat['no_surat']} telah diterima.";
+    //     } elseif ($type === 'barang') {
+    //         $message = "Barang dengan nomor {$surat['no_surat']} telah diterima.";
+    //     } else {
+    //         // Jenis notifikasi tidak valid
+    //         echo json_encode(['status' => 'error', 'message' => 'Jenis notifikasi tidak valid.']);
+    //         return;
+    //     }
 
-        $email->setMessage($message);
+    //     $email->setMessage($message);
 
-        if ($email->send()) {
-            // Email terkirim
-            echo json_encode(['status' => 'success', 'message' => 'Email notifikasi berhasil dikirim.']);
-        } else {
-            // Gagal mengirim email
-            echo json_encode(['status' => 'error', 'message' => 'Gagal mengirim email notifikasi.']);
-        }
-    }
+    //     if ($email->send()) {
+    //         // Email terkirim
+    //         echo json_encode(['status' => 'success', 'message' => 'Email notifikasi berhasil dikirim.']);
+    //     } else {
+    //         // Gagal mengirim email
+    //         echo json_encode(['status' => 'error', 'message' => 'Gagal mengirim email notifikasi.']);
+    //     }
+    // }
 }

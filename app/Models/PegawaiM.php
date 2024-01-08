@@ -42,11 +42,25 @@ class PegawaiM extends Model
             ->getRowArray();
     }
 
-
     public function deletePegawai($idpegawai)
     {
         return $this->db->table($this->table)
             ->where('id_pegawai', $idpegawai)
             ->delete();
+    }
+
+    // Menghitung Jumlah data
+    public function getTotalUser()
+    {
+        $query = $this->db->table('tbl_user')->get();
+        $result = $query->getResult();
+        return count($result);
+    }
+
+    public function getTotalPegawai()
+    {
+        $query = $this->db->table('tbl_pegawai')->get();
+        $result = $query->getResult();
+        return count($result);
     }
 }

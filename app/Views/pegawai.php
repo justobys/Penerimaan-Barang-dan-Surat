@@ -170,6 +170,9 @@
                                     <a href="<?= base_url('Pegawai/tambah') ?>" class="btn btn-primary"><i
                                             class="fas fa-plus"></i>
                                         Tambah</a>
+                                    <button class="btn btn-warning" onclick="ExportData()">
+                                        <i class="fas fa-file-export"></i> Export
+                                    </button>
                                     <div class="float-right ml-4">
                                         <form action="<?= base_url('Pegawai') ?>" method="get" class="form-inline">
                                             <div class="input-group">
@@ -326,6 +329,29 @@
                         "responsive": true,
                     });
                 });
+            </script>
+
+            <!-- Export Data -->
+            <!-- Export Data -->
+            <script>
+                function ExportData() {
+                    Swal.fire({
+                        title: 'Export Data',
+                        text: 'Silakan pilih format ekspor:',
+                        showCancelButton: true,
+                        confirmButtonColor: '#288421',
+                        cancelButtonColor: '#3085d6',
+                        confirmButtonText: '<i class="fas fa-file-excel"></i> Excel',
+                        cancelButtonText: '<i class="fas fa-file-pdf"></i> PDF',
+                        showCloseButton: true
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            window.location.href = "<?= base_url('Pegawai/export'); ?>";
+                        } else if (result.dismiss === Swal.DismissReason.cancel) {
+                            window.location.href = "<?= base_url('Pegawai/exportpdf'); ?>";
+                        }
+                    });
+                }
             </script>
 </body>
 

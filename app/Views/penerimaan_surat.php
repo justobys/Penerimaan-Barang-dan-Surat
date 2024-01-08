@@ -257,10 +257,10 @@
                               <button class="btn btn-danger mb-1" onclick="confirmDelete(<?= $p['id'] ?>)">
                                 <i class="fas fa-trash mr-1"></i>Delete
                               </button>
-                              <button class="btn btn-primary" data-id="<?= $p['id'] ?>" data-type="barang"
+                              <!-- <button class="btn btn-primary" data-id="<?= $p['id'] ?>" data-type="barang"
                                 onclick="sendEmailNotification(this)">
                                 <i class="fas fa-paper-plane mr-1"></i>Send Email
-                              </button>
+                              </button> -->
                             </td>
                           </tr>
                           <?php
@@ -364,7 +364,7 @@
         });
       </script>
 
-      <script>
+      <!-- <script>
         function sendEmailNotification(button) {
           var id = $(button).data('id');
           var type = $(button).data('type');
@@ -397,7 +397,7 @@
             }
           });
         }
-      </script>`
+      </script> -->
 </body>
 
 </html>
