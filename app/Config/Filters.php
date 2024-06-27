@@ -20,11 +20,12 @@ class Filters extends BaseConfig
      * @phpstan-var array<string, class-string|list<class-string>>
      */
     public array $aliases = [
-        'csrf'          => CSRF::class,
-        'toolbar'       => DebugToolbar::class,
-        'honeypot'      => Honeypot::class,
-        'invalidchars'  => InvalidChars::class,
+        'csrf' => CSRF::class,
+        'toolbar' => DebugToolbar::class,
+        'honeypot' => Honeypot::class,
+        'invalidchars' => InvalidChars::class,
         'secureheaders' => SecureHeaders::class,
+        'auth' => \App\Filters\Auth::class,
     ];
 
     /**
@@ -36,14 +37,10 @@ class Filters extends BaseConfig
      */
     public array $globals = [
         'before' => [
-            // 'honeypot',
-            // 'csrf',
-            // 'invalidchars',
+            // 'auth' => ['except' => ['login']],
         ],
         'after' => [
-            'toolbar',
-            // 'honeypot',
-            // 'secureheaders',
+            //
         ],
     ];
 

@@ -8,7 +8,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Ubah Password</title>
+    <title>Input Surat Masuk</title>
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet"
@@ -40,6 +40,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <!-- Right navbar links -->
             <ul class="navbar-nav ml-auto">
                 <!-- Navbar Search -->
+
                 <li class="nav-item">
                     <a class="nav-link" data-widget="fullscreen" href="#" role="button">
                         <i class="fas fa-expand-arrows-alt"></i>
@@ -58,12 +59,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1 class="m-0">Ubah Password</h1>
+                            <h1 class="m-0">Input Surat Masuk</h1>
                         </div><!-- /.col -->
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
                                 <li class="breadcrumb-item"><a href="<?= base_url('Dashboard/index') ?>">Home</a></li>
-                                <li class="breadcrumb-item active">Ubah Password</li>
+                                <li class="breadcrumb-item active">Input Surat</li>
                             </ol>
                         </div><!-- /.col -->
                     </div><!-- /.row -->
@@ -79,51 +80,61 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             <div class="card">
                                 <!-- Card Header -->
                                 <div class="card-header">
-                                    <form action="<?= base_url('UbahPassword/ubah') ?>" method="post"
-                                        id="ubahPasswordForm">
-                                        <div class="form-group">
-                                            <label for="email">Email</label>
-                                            <div class="input-group mb-3">
-                                                <input type="email" class="form-control col-md-12" placeholder="Email"
-                                                    name="email" value="<?= $session->get('email') ?>" readonly>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="username">Username</label>
-                                            <div class="input-group mb-3">
-                                                <input type="username" class="form-control col-12"
-                                                    placeholder="username" name="username"
-                                                    value="<?= $session->get('username') ?>" readonly>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="password">Password</label>
-                                            <div class="input-group mb-3">
-                                                <input type="password" class="form-control col-12"
-                                                    placeholder="Password" name="password" id="password">
-                                                <div class="input-group-append">
-                                                    <button type="button" class="btn btn-outline-secondary"
-                                                        id="togglePassword">
-                                                        <span class="fas fa-eye"></span>
-                                                    </button>
+                                    <form action="<?= base_url('DaftarSurat/tambahSurat') ?>" method="post"
+                                        enctype="multipart/form-data">
+                                        <div class="row">
+                                            <!-- Bagian Kiri -->
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="no_surat">No. Surat</label>
+                                                    <input type="text" class="form-control" id="no_surat"
+                                                        name="no_surat" placeholder="Masukkan No. Surat" required>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="nama_surat">Nama Surat</label>
+                                                    <input type="text" class="form-control" id="nama_surat"
+                                                        name="nama_surat" placeholder="Masukkan Nama Surat" required>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="deskripsi">Deskripsi</label>
+                                                    <textarea class="form-control" id="deskripsi" name="deskripsi"
+                                                        rows="3" placeholder="Masukkan Deskripsi" required></textarea>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="password2">Konfirmasi Password</label>
-                                            <div class="input-group mb-3">
-                                                <input type="password" class="form-control col-12"
-                                                    placeholder="Password" name="password_confirm"
-                                                    id="password_confirm">
+
+                                            <!-- Bagian Kanan -->
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="pegawai">Pegawai</label>
+                                                    <select class="form-control" id="id_pegawai" name="id_pegawai"
+                                                        required>
+                                                        <?php foreach ($dataPegawai as $pegawai): ?>
+                                                            <option value="<?= $pegawai['id_pegawai'] ?>">
+                                                                <?= $pegawai['nama_pegawai'] ?>
+                                                            </option>
+                                                        <?php endforeach; ?>
+                                                    </select>
+
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="foto_surat">Foto Surat</label>
+                                                    <input type="file" class="form-control-file" id="foto_surat"
+                                                        name="foto_surat" accept="image/*">
+                                                </div>
+                                                <div class="form-group  mt-4">
+                                                    <label for="status">Status</label>
+                                                    <select class="form-control" id="status" name="status" required>
+                                                        <option value="Belum Diterima">Belum Diterima</option>
+                                                        <option value="Diterima">Diterima</option>
+                                                    </select>
+                                                    <div class="mt-2 ml-2">
+                                                        <button type="button" class="btn btn-danger mr-auto col-auto"
+                                                            onclick="window.location.href='<?= base_url('DaftarSurat') ?>'">Batal</button>
+                                                        <button type="submit"
+                                                            class="btn btn-primary ml-auto col-auto">Simpan</button>
+                                                    </div>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="d-flex justify-content-start">
-                                            <button type="button" class="btn btn-danger mr-auto col-auto"
-                                                onclick="window.location.href='<?= base_url('Dashboard') ?>'">Batal</button>
-                                            <button type="submit" class="btn btn-primary"><span
-                                                    class="fas fa-edit"></span>
-                                                Ubah
-                                                Password</button>
                                         </div>
                                     </form>
                                 </div>
@@ -135,7 +146,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <!-- /.content -->
 
             <!-- Main Footer -->
-            <footer class="ml-2 mr-2">
+            <footer class="ml-2 mr-2 mt-auto">
                 <!-- To the right -->
                 <div class="float-right d-none d-sm-inline">
                     Anything you want
@@ -161,12 +172,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <!-- Page specific script -->
         <!-- SweetAlert Error Modal -->
         <script>
-            <?php if (session()->get('errors')): ?>
+            <?php if (isset($errors) && !empty($errors)): ?>
                 Swal.fire({
                     icon: 'error',
                     title: 'Oops...',
-                    text: <?php echo json_encode(session()->get('error')); ?>',
-                                    });
+                    html: '<?php echo implode("<br>", $errors); ?>',
+                });
             <?php endif; ?>
         </script>
 
@@ -179,38 +190,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     text: 'Password berhasil diubah!',
                 });
             <?php endif; ?>
-        </script>
-
-        <!-- Password validation -->
-        <script>
-            $(document).ready(function () {
-                $('#ubahPasswordForm').submit(function () {
-                    const password = $('#password').val();
-                    const passwordConfirm = $('#password_confirm').val();
-
-                    // Validasi panjang password dan kecocokan password dan konfirmasi
-                    if (password.length < 6) {
-                        Swal.fire({
-                            icon: 'error',
-                            title: 'Oops...',
-                            text: 'Password harus terdiri dari setidaknya 6 karakter.',
-                        });
-                        return false;
-                    }
-
-                    if (password !== passwordConfirm) {
-                        Swal.fire({
-                            icon: 'error',
-                            title: 'Oops...',
-                            text: 'Password dan konfirmasi password tidak cocok.',
-                        });
-                        return false;
-                    }
-
-                    // Lanjutkan dengan mengirim formulir jika validasi berhasil
-                    return true;
-                });
-            });
         </script>
 
         <!-- Skrip JavaScript untuk toggle password -->

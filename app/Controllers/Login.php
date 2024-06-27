@@ -8,22 +8,6 @@ class Login extends BaseController
 {
     public function index()
     {
-        // Mengambil pesan sukses/error dari flash data
-        $successMessage = session()->getFlashdata('success');
-        $errorMessage = session()->getFlashdata('err');
-
-        // Menampilkan pesan sukses/error jika ada
-        if ($successMessage) {
-            echo '<div class="alert alert-success alert-dismissible fade show" role="alert" style="margin-bottom: 10px;">';
-            echo $successMessage;
-            echo '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>';
-            echo '</div>';
-        } elseif ($errorMessage) {
-            echo '<div class="alert alert-danger alert-dismissible fade show" role="alert" style="margin-bottom: 10px;">';
-            echo $errorMessage;
-            echo '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>';
-            echo '</div>';
-        }
         return view('login');
     }
 
@@ -33,6 +17,8 @@ class Login extends BaseController
         $model = new User();
         $email = $this->request->getVar('email');
         $password = $this->request->getVar('password');
+        // $rememberMe = $this->request->getVar('remember');
+
         $data = $model->where('email', $email)->first();
 
         if ($data) {
@@ -43,22 +29,45 @@ class Login extends BaseController
                     'id' => $data['id'],
                     'username' => $data['username'],
                     'email' => $data['email'],
-                    'password' => $data['password'],
-                    'logged_in' => TRUE
+                    'logged_in' => true,
                 ];
-                $session->setFlashdata('success', 'Login Berhasil');
+
                 $session->set($ses_data);
-                return redirect()->to('/Dashboard');
-            } else {
-                $session->setFlashdata('err', 'Password/email salah!, Silahkan Periksa Kembali! ');
-                return redirect()->to('/login');
+
+                // if ($rememberMe) {
+                //     $this->setRememberMeCookie($data['id']);
+                // }
+
+                return redirect()->to('/Dashboard')->with('success', 'Login Berhasil');
             }
         }
+
+        return redirect()->to('/login')->with('error', 'Password/email salah! Silahkan periksa kembali!');
     }
-    function logout()
+
+    // private function setRememberMeCookie($userId)
+    // {
+    //     helper('cookie');
+    //     helper('text');
+    //     $token = random_string('alnum', 32); // Menggenerate random token
+    //     $model = new User();
+
+    //     // Jika pengguna sudah memiliki remember_token, lakukan update
+    //     $model->update($userId, ['remember_token' => $token]);
+
+    //     // Jika pengguna belum memiliki remember_token, lakukan insert
+    //     if ($model->affectedRows() == 0) {
+    //         $model->save(['id' => $userId, 'remember_token' => $token]);
+    //     }
+
+    //     // Set the Remember Me cookie with a long expiration time (e.g., two weeks)
+    //     set_cookie('remember_me', $token, 60 * 60 * 24 * 14); // 14 days expiration
+    // }
+
+
+    public function logout()
     {
         session()->destroy();
         return redirect()->to('/login');
     }
 }
-?>

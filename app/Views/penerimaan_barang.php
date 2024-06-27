@@ -1,14 +1,10 @@
 <!DOCTYPE html>
-<!--
-This is a starter template page. Use this page to start your new project from
-scratch. This page gets rid of all links and provides the needed markup only.
--->
 <html lang="en">
 
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>AdminLTE 3 | Starter</title>
+  <title>Daftar Penerimaan Barang</title>
 
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet"
@@ -17,9 +13,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <link rel="stylesheet" href="../plugins/fontawesome-free/css/all.min.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="../dist/css/adminlte.min.css">
+  <!-- Custom Css -->
+  <link rel="stylesheet" href="../css/style.css">
 </head>
 
-<body class="hold-transition sidebar-mini">
+<body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed">
   <div class="wrapper">
 
     <!-- Navbar -->
@@ -30,34 +28,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
           <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
         </li>
         <li class="nav-item d-none d-sm-inline-block">
-          <a href="index3.html" class="nav-link">Home</a>
+          <a href="<?= base_url('Dashboard') ?>" class="nav-link">Home</a>
         </li>
       </ul>
 
       <!-- Right navbar links -->
       <ul class="navbar-nav ml-auto">
         <!-- Navbar Search -->
-        <li class="nav-item">
-          <a class="nav-link" data-widget="navbar-search" href="#" role="button">
-            <i class="fas fa-search"></i>
-          </a>
-          <div class="navbar-search-block">
-            <form class="form-inline">
-              <div class="input-group input-group-sm">
-                <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
-                <div class="input-group-append">
-                  <button class="btn btn-navbar" type="submit">
-                    <i class="fas fa-search"></i>
-                  </button>
-                  <button class="btn btn-navbar" type="button" data-widget="navbar-search">
-                    <i class="fas fa-times"></i>
-                  </button>
-                </div>
-              </div>
-            </form>
-          </div>
-        </li>
-
         <li class="nav-item">
           <a class="nav-link" data-widget="fullscreen" href="#" role="button">
             <i class="fas fa-expand-arrows-alt"></i>
@@ -88,7 +65,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
             $session = \Config\Services::session();
             echo "<a href='#' class='d-block'>" . $session->get('username') . "</a>";
             ?>
-
           </div>
         </div>
 
@@ -120,24 +96,32 @@ scratch. This page gets rid of all links and provides the needed markup only.
               <a href="#" class="nav-link active">
                 <i class="nav-icon fas fa-table"></i>
                 <p>
-                  DataTable
+                  Daftar Penerimaan
                   <i class="right fas fa-angle-left"></i>
                 </p>
               </a>
               <ul class="nav nav-treeview">
                 <li class="nav-item">
-                  <a href="<?= base_url('P_Barang') ?>" class="nav-link active">
+                  <a href="<?= base_url('DaftarBarang') ?>" class="nav-link active">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Penerimaan Barang</p>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="<?= base_url('P_Surat') ?>" class="nav-link">
+                  <a href="<?= base_url('DaftarSurat') ?>" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Penerimaan Surat</p>
                   </a>
                 </li>
               </ul>
+            </li>
+            <li class="nav-item">
+              <a href="<?= base_url('Pegawai') ?>" class="nav-link">
+                <i class="nav-icon fas fa-users"></i>
+                <p>
+                  Data Pegawai
+                </p>
+              </a>
             </li>
             <li class="nav-item">
               <a href="<?php echo base_url('Login/logout'); ?>" class="nav-link">
@@ -161,12 +145,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <div class="container-fluid">
           <div class="row mb-2">
             <div class="col-sm-6">
-              <h1 class="m-0">DataTable Penerimaan Barang</h1>
+              <h1 class="m-0">Daftar Penerimaan Barang</h1>
             </div><!-- /.col -->
             <div class="col-sm-6">
               <ol class="breadcrumb float-sm-right">
                 <li class="breadcrumb-item"><a href="#">Home</a></li>
-                <li class="breadcrumb-item active">DataTable Penerimaan Barang</li>
+                <li class="breadcrumb-item active">Daftar Penerimaan Barang</li>
               </ol>
             </div><!-- /.col -->
           </div><!-- /.row -->
@@ -181,112 +165,122 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <div class="col-12">
               <div class="card">
                 <div class="card-header">
-                  <a href="#" class="btn btn-primary"><i class="fas fa-plus"></i> Tambah</a>
-                  <input type="search" class="form-control float-right col-5" placeholder="Search">
-                  <!-- <h3 class="card-title">DataTable with minimal features & hover style</h3> -->
+                  <a href="<?= base_url('DaftarBarang/tambahBarang') ?>" class="btn btn-primary"><i
+                      class="fas fa-plus"></i></a>
+                  <button class="btn btn-warning" onclick="ExportData()">
+                    <i class="fas fa-file-export"></i>
+                  </button>
+                  <div class="float-right ml-4">
+                    <form action="<?= base_url('DaftarBarang') ?>" method="get" class="form-inline">
+                      <div class="input-group">
+                        <input type="search" name="search" class="form-control" placeholder="Search">
+                      </div>
+                      <div class="input-group ml-2">
+                        <select name="status" class="form-control">
+                          <option value="">All</option>
+                          <option value="received">Diterima</option>
+                          <option value="not_received">Belum Diterima</option>
+                        </select>
+                      </div>
+                      <div class="input-group ml-2">
+                        <input type="date" name="StartDate" class="form-control" placeholder="Start Date"
+                          aria-label="Start Date">
+                        <div class="input-group-append">
+                          <span class="input-group-text bg-secondary px-2">s/d</span>
+                        </div>
+                        <input type="date" name="EndDate" class="form-control" placeholder="End Date"
+                          aria-label="End Date">
+                        <div class="input-group-append">
+                          <button type="submit" class="btn btn-success"><i class="fas fa-search"></i></button>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
                 </div>
                 <!-- /.card-header -->
+
                 <div class="card-body">
-                  <table id="example2" class="table table-bordered table-hover">
+                  <table id="tableBarang" class="table table-bordered table-hover">
                     <thead>
                       <tr>
-                        <th>Rendering engine</th>
-                        <th>Browser</th>
-                        <th>Platform(s)</th>
-                        <th>Engine version</th>
-                        <th>CSS grade</th>
+                        <th>ID</th>
+                        <th>Tanggal</th>
+                        <th>No. Resi</th>
+                        <th>Nama Barang</th>
+                        <th>Deskripsi</th>
+                        <th>Foto Barang</th>
+                        <th>Penerima</th>
+                        <th>Status</th>
+                        <th>Aksi</th>
                       </tr>
                     </thead>
                     <tbody>
-                      <tr>
-                        <td>Trident</td>
-                        <td>Internet
-                          Explorer 4.0
-                        </td>
-                        <td>Win 95+</td>
-                        <td> 4</td>
-                        <td>X</td>
-                      </tr>
-                      <tr>
-                        <td>Trident</td>
-                        <td>Internet
-                          Explorer 5.0
-                        </td>
-                        <td>Win 95+</td>
-                        <td>5</td>
-                        <td>C</td>
-                      </tr>
-                      <tr>
-                        <td>Trident</td>
-                        <td>Internet
-                          Explorer 5.5
-                        </td>
-                        <td>Win 95+</td>
-                        <td>5.5</td>
-                        <td>A</td>
-                      </tr>
-                      <tr>
-                        <td>Trident</td>
-                        <td>Internet
-                          Explorer 6
-                        </td>
-                        <td>Win 98+</td>
-                        <td>6</td>
-                        <td>A</td>
-                      </tr>
-                      <tr>
-                        <td>Trident</td>
-                        <td>Internet Explorer 7</td>
-                        <td>Win XP SP2+</td>
-                        <td>7</td>
-                        <td>A</td>
-                      </tr>
-                      <tr>
-                        <td>Trident</td>
-                        <td>AOL browser (AOL desktop)</td>
-                        <td>Win XP</td>
-                        <td>6</td>
-                        <td>A</td>
-                      </tr>
-                      <tr>
-                        <td>Gecko</td>
-                        <td>Firefox 1.0</td>
-                        <td>Win 98+ / OSX.2+</td>
-                        <td>1.7</td>
-                        <td>A</td>
-                      </tr>
-
+                      <?php
+                      $row = 1;
+                      if (isset($data) && is_array($data)):
+                        foreach ($data as $p):
+                          ?>
+                          <tr>
+                            <td>
+                              <?= $row++ ?>
+                            </td>
+                            <td>
+                              <?= date('d/m/Y', strtotime($p['tanggal'])); ?>
+                            </td>
+                            <td>
+                              <?= $p['no_resi'] ?>
+                            </td>
+                            <td>
+                              <?= $p['nama_barang'] ?>
+                            </td>
+                            <td>
+                              <?= $p['deskripsi'] ?>
+                            </td>
+                            <td>
+                              <?php if (!empty($p['foto_barang'])): ?>
+                                <img src="<?= base_url($p['foto_barang']) ?>" alt="Foto Barang" width="150" height="100"
+                                  onerror="this.src='<?= base_url('path/to/transparent-image.png') ?>'; this.alt='Image Not Found';">
+                              <?php else: ?>
+                                <div class="image-not-found">Image Not Found</div>
+                              <?php endif; ?>
+                            </td>
+                            <td>
+                              <?= $p['nama_pegawai'] ?>
+                            </td>
+                            <td>
+                              <?php
+                              $badgeClass = ($p['status'] == 'Diterima') ? 'badge-success' : 'badge-danger';
+                              echo '<span class="badge ' . $badgeClass . '">' . $p['status'] . '</span>';
+                              ?>
+                            </td>
+                            <td class="text-center">
+                              <a href="DaftarBarang/ubahBarang/<?= $p['id'] ?>" class="btn btn-warning mb-1">
+                                <i class="fas fa-pencil-alt mr-1"></i>Ubah
+                              </a>
+                              <button class="btn btn-danger mb-1" onclick="confirmDelete(<?= $p['id'] ?>)">
+                                <i class="fas fa-trash mr-1"></i>Delete
+                              </button>
+                              <!-- <button class="btn btn-primary" data-id="<?= $p['id'] ?>" data-type="barang"
+                                onclick="sendEmailNotification(this)">
+                                <i class="fas fa-paper-plane mr-1"></i>Send Email
+                              </button> -->
+                            </td>
+                          </tr>
+                          <?php
+                        endforeach;
+                      endif;
+                      ?>
                     </tbody>
-                    <tfoot>
-                      <tr>
-                        <th>Rendering engine</th>
-                        <th>Browser</th>
-                        <th>Platform(s)</th>
-                        <th>Engine version</th>
-                        <th>CSS grade</th>
-                      </tr>
-                    </tfoot>
                   </table>
                 </div>
                 <!-- /.card-body -->
               </div>
               <!-- /.card -->
-              <!-- /.row -->
             </div><!-- /.container-fluid -->
           </div>
           <!-- /.content -->
         </div>
         <!-- /.content-wrapper -->
-
-        <!-- Control Sidebar -->
-        <aside class="control-sidebar control-sidebar-dark">
-          <!-- Control sidebar content goes here -->
-          <div class="p-3">
-            <h5>Title</h5>
-            <p>Sidebar content</p>
-          </div>
-        </aside>
-        <!-- /.control-sidebar -->
 
         <!-- Main Footer -->
         <footer class="main-footer">
@@ -295,14 +289,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
             Anything you want
           </div>
           <!-- Default to the left -->
-          <strong>Copyright &copy; 2014-2021 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights
-          reserved.
+          <strong>Copyright &copy; 2014-2021 <a href="https://adminlte.io">AdminLTE.io</a>.</strong>
+          All rights reserved.
         </footer>
       </div>
       <!-- ./wrapper -->
 
       <!-- REQUIRED SCRIPTS -->
-
       <!-- jQuery -->
       <script src="../../plugins/jquery/jquery.min.js"></script>
       <!-- Bootstrap 4 -->
@@ -316,10 +309,75 @@ scratch. This page gets rid of all links and provides the needed markup only.
       <script src="../../plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
       <!-- AdminLTE App -->
       <script src="../../dist/js/adminlte.min.js"></script>
+      <!-- Sweet Alert -->
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
       <!-- Page specific script -->
+      <!-- SweetAlert Error Modal -->
+      <script>
+        <?php if (isset($errors) && !empty($errors)): ?>
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            html: '<?php echo implode("<br>", $errors); ?>',
+          });
+        <?php endif; ?>
+      </script>
+
+      <!-- SweetAlert Success Modal -->
+      <script>
+        <?php if (session()->get('success')): ?>
+          Swal.fire({
+            icon: 'success',
+            title: 'Success',
+            text: <?php echo json_encode(session()->get('success')); ?>,
+          });
+        <?php endif; ?>
+      </script>
+
+      <!-- SweetAlert Delete -->
+      <script>
+        function confirmDelete(id) {
+          Swal.fire({
+            title: 'Apakah anda yakin akan menghapus data ini?',
+            text: "Anda tidak akan dapat mengembalikannya!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Hapus!'
+          }).then((result) => {
+            if (result.isConfirmed) {
+              window.location.href = "DaftarBarang/hapusBarang/" + id;
+            }
+          })
+        }
+      </script>
+
+      <!-- Export Data -->
+      <script>
+        function ExportData() {
+          Swal.fire({
+            title: 'Export Data',
+            text: 'Silakan pilih format ekspor:',
+            showCancelButton: true,
+            confirmButtonColor: '#288421',
+            cancelButtonColor: '#3085d6',
+            confirmButtonText: '<i class="fas fa-file-excel"></i> Excel',
+            cancelButtonText: '<i class="fas fa-file-pdf"></i> PDF',
+            showCloseButton: true
+          }).then((result) => {
+            if (result.isConfirmed) {
+              window.location.href = "<?= base_url('DaftarBarang/export'); ?>";
+            } else if (result.dismiss === Swal.DismissReason.cancel) {
+              window.location.href = "<?= base_url('DaftarBarang/exportpdf'); ?>";
+            }
+          });
+        }
+      </script>
+
       <script>
         $(function () {
-          $('#example2').DataTable({
+          $('#tableBarang').DataTable({
             "paging": true,
             "lengthChange": false,
             "searching": false,
@@ -330,6 +388,41 @@ scratch. This page gets rid of all links and provides the needed markup only.
           });
         });
       </script>
+
+      <!-- <script>
+        function sendEmailNotification(button) {
+          var id = $(button).data('id');
+          var type = $(button).data('type');
+
+          $.ajax({
+            type: 'POST',
+            url: '<?= base_url("DaftarBarang/sendEmailNotification") ?>/' + id + '/' + type,
+            success: function (response) {
+              var result = JSON.parse(response);
+              if (result.status === 'success') {
+                Swal.fire({
+                  icon: 'success',
+                  title: 'Notifikasi Terkirim',
+                  text: result.message,
+                });
+              } else {
+                Swal.fire({
+                  icon: 'error',
+                  title: 'Gagal',
+                  text: result.message,
+                });
+              }
+            },
+            error: function () {
+              Swal.fire({
+                icon: 'error',
+                title: 'Gagal',
+                text: 'Terjadi kesalahan saat mengirim notifikasi.',
+              });
+            }
+          });
+        }
+      </script> -->
 </body>
 
 </html>
