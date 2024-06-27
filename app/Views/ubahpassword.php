@@ -29,17 +29,39 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <!-- Left navbar links -->
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link nav-item" href="<?= base_url('Dashboard') ?>" role="button"><i
+                    <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i
                             class="fas fa-arrow-left"></i></a>
                 </li>
                 <li class="nav-item d-none d-sm-inline-block">
-                    <a href="<?= base_url('Dashboard') ?>" class="nav-link">Kembali</a>
+                    <a href="<?= base_url('Dashboard/index') ?>" class="nav-link">Kembali</a>
                 </li>
             </ul>
 
             <!-- Right navbar links -->
             <ul class="navbar-nav ml-auto">
                 <!-- Navbar Search -->
+                <li class="nav-item">
+                    <a class="nav-link" data-widget="navbar-search" href="#" role="button">
+                        <i class="fas fa-search"></i>
+                    </a>
+                    <div class="navbar-search-block">
+                        <form class="form-inline">
+                            <div class="input-group input-group-sm">
+                                <input class="form-control form-control-navbar" type="search" placeholder="Search"
+                                    aria-label="Search">
+                                <div class="input-group-append">
+                                    <button class="btn btn-navbar" type="submit">
+                                        <i class="fas fa-search"></i>
+                                    </button>
+                                    <button class="btn btn-navbar" type="button" data-widget="navbar-search">
+                                        <i class="fas fa-times"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </li>
+
                 <li class="nav-item">
                     <a class="nav-link" data-widget="fullscreen" href="#" role="button">
                         <i class="fas fa-expand-arrows-alt"></i>
@@ -79,53 +101,62 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             <div class="card">
                                 <!-- Card Header -->
                                 <div class="card-header">
-                                    <form action="<?= base_url('UbahPassword/ubah') ?>" method="post"
-                                        id="ubahPasswordForm">
-                                        <div class="form-group">
-                                            <label for="email">Email</label>
-                                            <div class="input-group mb-3">
-                                                <input type="email" class="form-control col-md-12" placeholder="Email"
-                                                    name="email" value="<?= $session->get('email') ?>" readonly>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="username">Username</label>
-                                            <div class="input-group mb-3">
-                                                <input type="username" class="form-control col-12"
-                                                    placeholder="username" name="username"
-                                                    value="<?= $session->get('username') ?>" readonly>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="password">Password</label>
-                                            <div class="input-group mb-3">
-                                                <input type="password" class="form-control col-12"
-                                                    placeholder="Password" name="password" id="password">
-                                                <div class="input-group-append">
-                                                    <button type="button" class="btn btn-outline-secondary"
-                                                        id="togglePassword">
-                                                        <span class="fas fa-eye"></span>
-                                                    </button>
+                                    <div class="form-group">
+                                        <label for="email">Email</label>
+                                        <div class="input-group mb-3">
+                                            <input type="email" class="form-control col-md-12" placeholder="Email"
+                                                name="email" value="<?= $session->get('email') ?>" readonly>
+                                            <div class="input-group-append">
+                                                <div class="input-group-text">
+                                                    <span class="fas fa-envelope"></span>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="form-group">
-                                            <label for="password2">Konfirmasi Password</label>
-                                            <div class="input-group mb-3">
-                                                <input type="password" class="form-control col-12"
-                                                    placeholder="Password" name="password_confirm"
-                                                    id="password_confirm">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="username">Username</label>
+                                        <div class="input-group mb-3">
+                                            <input type="username" class="form-control col-12" placeholder="username"
+                                                name="username" value="<?= $session->get('username') ?>" readonly>
+                                            <div class="input-group-append">
+                                                <div class="input-group-text">
+                                                    <span class="fas fa-user"></span>
+                                                </div>
                                             </div>
                                         </div>
-                                        <div class="d-flex justify-content-start">
-                                            <button type="button" class="btn btn-danger mr-auto col-auto"
-                                                onclick="window.location.href='<?= base_url('Dashboard') ?>'">Batal</button>
-                                            <button type="submit" class="btn btn-primary"><span
-                                                    class="fas fa-edit"></span>
-                                                Ubah
-                                                Password</button>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="password">Password</label>
+                                        <div class="input-group mb-3">
+                                            <input type="password" class="form-control col-12" placeholder="Password"
+                                                name="password">
+                                            <div class="input-group-append">
+                                                <div class="input-group-text">
+                                                    <span class="fas fa-lock"></span>
+                                                </div>
+                                            </div>
                                         </div>
-                                    </form>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="password_confirm">Konfirmasi Password</label>
+                                        <div class="input-group mb-3">
+                                            <input type="password" class="form-control col-12"
+                                                placeholder="Konfirmasi Password" name="password_confirm">
+                                            <div class="input-group-append">
+                                                <div class="input-group-text">
+                                                    <span class="fas fa-lock"></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex justify-content-start">
+                                        <a href="<?= base_url('Dashboard/index') ?>" class="btn btn-danger mr-5"><span
+                                                class="fas fa-times"></span>
+                                            Batal</a>
+                                        <button type="submit" class="btn btn-primary"><span class="fas fa-edit"></span>
+                                            Ubah
+                                            Password</button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -154,90 +185,29 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <script src="../../plugins/jquery/jquery.min.js"></script>
         <!-- Bootstrap 4 -->
         <script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-        <!-- Sweet Alert -->
-        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <!-- DataTables  & Plugins -->
+        <script src="../../plugins/datatables/jquery.dataTables.min.js"></script>
+        <script src="../../plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+        <script src="../../plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+        <script src="../../plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+        <script src="../../plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+        <script src="../../plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
         <!-- AdminLTE App -->
         <script src="../../dist/js/adminlte.min.js"></script>
         <!-- Page specific script -->
-        <!-- SweetAlert Error Modal -->
         <script>
-            <?php if (session()->get('errors')): ?>
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Oops...',
-                    text: <?php echo json_encode(session()->get('error')); ?>',
-                                    });
-            <?php endif; ?>
-        </script>
-
-        <!-- SweetAlert Success Modal -->
-        <script>
-            <?php if (session()->get('success')): ?>
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Success',
-                    text: 'Password berhasil diubah!',
-                });
-            <?php endif; ?>
-        </script>
-
-        <!-- Password validation -->
-        <script>
-            $(document).ready(function () {
-                $('#ubahPasswordForm').submit(function () {
-                    const password = $('#password').val();
-                    const passwordConfirm = $('#password_confirm').val();
-
-                    // Validasi panjang password dan kecocokan password dan konfirmasi
-                    if (password.length < 6) {
-                        Swal.fire({
-                            icon: 'error',
-                            title: 'Oops...',
-                            text: 'Password harus terdiri dari setidaknya 6 karakter.',
-                        });
-                        return false;
-                    }
-
-                    if (password !== passwordConfirm) {
-                        Swal.fire({
-                            icon: 'error',
-                            title: 'Oops...',
-                            text: 'Password dan konfirmasi password tidak cocok.',
-                        });
-                        return false;
-                    }
-
-                    // Lanjutkan dengan mengirim formulir jika validasi berhasil
-                    return true;
+            $(function () {
+                $('#example2').DataTable({
+                    "paging": true,
+                    "lengthChange": false,
+                    "searching": false,
+                    "ordering": true,
+                    "info": true,
+                    "autoWidth": false,
+                    "responsive": true,
                 });
             });
         </script>
-
-        <!-- Skrip JavaScript untuk toggle password -->
-        <script>
-            $(document).ready(function () {
-                $('#togglePassword').on('click', function () {
-                    const passwordFields = $('#password, #password_confirm');
-
-                    passwordFields.each(function () {
-                        const passwordField = $(this);
-                        const passwordFieldType = passwordField.attr('type');
-
-                        if (passwordFieldType === 'password') {
-                            passwordField.attr('type', 'text');
-                            $('#togglePassword span').removeClass('fas fa-eye').addClass('fas fa-eye-slash');
-                        } else {
-                            passwordField.attr('type', 'password');
-                            $('#togglePassword span').removeClass('fas fa-eye-slash').addClass('fas fa-eye');
-                        }
-                    });
-
-                    // Mencegah perilaku default dari tombol
-                    event.preventDefault();
-                });
-            });
-        </script>
-
 </body>
 
 </html>

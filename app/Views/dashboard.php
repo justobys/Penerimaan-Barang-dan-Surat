@@ -17,8 +17,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <link rel="stylesheet" href="../plugins/fontawesome-free/css/all.min.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="../dist/css/adminlte.min.css">
-    <!-- Ionicons -->
-    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed">
@@ -39,6 +37,28 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <!-- Right navbar links -->
             <ul class="navbar-nav ml-auto">
                 <!-- Navbar Search -->
+                <li class="nav-item">
+                    <a class="nav-link" data-widget="navbar-search" href="#" role="button">
+                        <i class="fas fa-search"></i>
+                    </a>
+                    <div class="navbar-search-block">
+                        <form class="form-inline">
+                            <div class="input-group input-group-sm">
+                                <input class="form-control form-control-navbar" type="search" placeholder="Search"
+                                    aria-label="Search">
+                                <div class="input-group-append">
+                                    <button class="btn btn-navbar" type="submit">
+                                        <i class="fas fa-search"></i>
+                                    </button>
+                                    <button class="btn btn-navbar" type="button" data-widget="navbar-search">
+                                        <i class="fas fa-times"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </li>
+
                 <li class="nav-item">
                     <a class="nav-link" data-widget="fullscreen" href="#" role="button">
                         <i class="fas fa-expand-arrows-alt"></i>
@@ -109,26 +129,18 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="<?= base_url('DaftarBarang') ?>" class="nav-link">
+                                    <a href="<?= base_url('P_Barang') ?>" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Penerimaan Barang</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="<?= base_url('DaftarSurat') ?>" class="nav-link">
+                                    <a href="<?= base_url('P_Surat') ?>" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Penerimaan Surat</p>
                                     </a>
                                 </li>
                             </ul>
-                        </li>
-                        <li class="nav-item">
-                            <a href="<?= base_url('Pegawai') ?>" class="nav-link">
-                                <i class="nav-icon fas fa-users"></i>
-                                <p>
-                                    Data Pegawai
-                                </p>
-                            </a>
                         </li>
                         <li class="nav-item">
                             <a href="<?php echo base_url('Login/logout'); ?>" class="nav-link">
@@ -205,131 +217,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                         Password</a>
                                 </div>
                             </div>
-                            <!-- small Card -->
-                            <div class="row">
-                                <div class="col-lg-3 col-6">
-                                    <!-- small box -->
-                                    <div class="small-box bg-info">
-                                        <div class="inner">
-                                            <h3>
-                                                <?= $totalBarang ?>
-                                            </h3> <!-- Total Penerimaan -->
-
-                                            <p>Total Penerimaan Barang</p>
-                                        </div>
-                                        <div class="icon">
-                                            <i class="ion ion-cube"></i>
-                                        </div>
-                                        <a href="<?= base_url('DaftarBarang') ?>" class="small-box-footer">More info <i
-                                                class="fas fa-arrow-circle-right"></i></a>
-                                    </div>
-                                </div>
-
-                                <!-- small card -->
-                                <div class="col-lg-3 col-6">
-                                    <!-- small box -->
-                                    <div class="small-box bg-success">
-                                        <div class="inner">
-                                            <h3>
-                                                <?= $totalSurat ?>
-                                            </h3> <!-- Total Penerimaan -->
-
-                                            <p>Total Penerimaan Surat</p>
-                                        </div>
-                                        <div class="icon">
-                                            <i class="ion ion-email"></i>
-                                        </div>
-                                        <a href="<?= base_url('DaftarSurat') ?>" class="small-box-footer">More info <i
-                                                class="fas fa-arrow-circle-right"></i></a>
-                                    </div>
-                                </div>
-
-                                <!-- small card -->
-                                <div class="col-lg-3 col-6">
-                                    <!-- small box -->
-                                    <div class="small-box bg-warning">
-                                        <div class="inner">
-                                            <h3>
-                                                <?= $totaluser ?>
-                                            </h3> <!-- Resepsionis -->
-
-                                            <p>User</p>
-                                        </div>
-                                        <div class="icon">
-                                            <i class="ion ion-person"></i>
-                                        </div>
-                                        <a href="#" onclick="userinfo()" class="small-box-footer">More info <i
-                                                class="fas fa-arrow-circle-right"></i></a>
-                                    </div>
-                                </div>
-
-                                <!-- small card -->
-                                <div class="col-lg-3 col-6">
-                                    <!-- small box -->
-                                    <div class="small-box bg-danger">
-                                        <div class="inner">
-                                            <h3>
-                                                <?= $totalPegawai ?>
-                                            </h3> <!-- New pegawai -->
-                                            <p>Total Pegawai</p>
-                                        </div>
-                                        <div class="icon">
-                                            <i class="ion ion-ios-people"></i>
-                                        </div>
-                                        <a href="<?= base_url('Pegawai') ?>" class="small-box-footer">More info <i
-                                                class="fas fa-arrow-circle-right"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Graph -->
-                            <div class="card">
-                                <div class="card-header">
-                                    <h3 class="card-title">
-                                        <i class="fas fa-chart-pie mr-1"></i>
-                                        Total Penerimaan Barang & Surat
-                                    </h3>
-                                    <!-- <div class="card-tools">
-                                        <ul class="nav nav-pills ml-auto">
-                                            <li class="nav-item">
-                                                <a class="nav-link active" href="#Barang-chart"
-                                                    data-toggle="tab">Barang</a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a class="nav-link" href="#Surat-chart" data-toggle="tab">Surat</a>
-                                            </li>
-                                        </ul>
-                                    </div> -->
-                                </div> <!-- ./card-header -->
-                                <div class="card-body">
-                                    <div class="tab-content p-0">
-                                        <div class="card card-primary">
-                                            <div class="card-header">
-                                                <h3 class="card-title">Grafik Penerimaan Barang</h3>
-
-                                                <div class="card-tools">
-                                                    <button type="button" class="btn btn-tool"
-                                                        data-card-widget="collapse">
-                                                        <i class="fas fa-minus"></i>
-                                                    </button>
-                                                    <button type="button" class="btn btn-tool"
-                                                        data-card-widget="remove">
-                                                        <i class="fas fa-times"></i>
-                                                    </button>
-                                                </div>
-                                            </div>
-                                            <div class="card-body">
-                                                <div class="chart tab-pane active" id="Barang-chart">
-                                                    <canvas id="chartBarang"
-                                                        style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
-                                                </div>
-                                            </div>
-                                            <!-- /.card-body -->
-                                        </div>
-                                    </div>
-                                </div><!-- /.card-body -->
-                            </div>
-                            <!-- /.card -->
 
                             <!-- Penerimaan Barang -->
                             <div class="card">
@@ -352,15 +239,16 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <?php if (!empty($tbl_penerimaan_barang)): ?>
-                                                <?php $row = 1; ?>
-                                                <?php foreach ($tbl_penerimaan_barang as $p): ?>
+                                            <?php
+                                            if (isset($data['brg']) && is_array($data['brg'])):
+                                                foreach ($data['brg'] as $p):
+                                                    ?>
                                                     <tr>
                                                         <td>
-                                                            <?= $row++ ?>
+                                                            <?= $p['id'] ?>
                                                         </td>
                                                         <td>
-                                                            <?= date('d/m/Y', strtotime($p['tanggal'])); ?>
+                                                            <?= $p['tanggal'] ?>
                                                         </td>
                                                         <td>
                                                             <?= $p['no_resi'] ?>
@@ -372,228 +260,138 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                                             <?= $p['nama_pegawai'] ?>
                                                         </td>
                                                         <td>
-                                                            <?php if ($p['status'] == 'Diterima'): ?>
-                                                                <span class="badge badge-success">Diterima</span>
-                                                            <?php else: ?>
-                                                                <span class="badge badge-danger">Belum Diterima</span>
-                                                            <?php endif; ?>
+                                                            <?= $p['status'] ?>
                                                         </td>
                                                     </tr>
-                                                <?php endforeach; ?>
-                                            <?php endif; ?>
+                                                    <?php
+                                                endforeach;
+                                            endif;
+                                            ?>
                                         </tbody>
                                     </table>
                                 </div>
                             </div>
                             <!-- /.Penerimaan Barang -->
-
-                            <!-- Penerimaan Surat -->
-                            <div class="card">
-                                <!-- /.Card Header -->
-                                <div class="card-body">
-                                    <div class="row mb-2">
-                                        <div class="col-sm-6">
-                                            <h4 class="m-0">Table Penerimaan Surat Terbaru</h1>
-                                        </div>
-                                    </div><!-- /.row -->
-                                    <table id="tableSurat" class="table table-bordered table-hover">
-                                        <thead>
-                                            <tr>
-                                                <th>ID</th>
-                                                <th>Tanggal</th>
-                                                <th>No. Surat</th>
-                                                <th>Nama Surat</th>
-                                                <th>Penerima</th>
-                                                <th>Status</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <?php if (!empty($tbl_penerimaan_surat)): ?>
-                                                <?php $row = 1; ?>
-                                                <?php foreach ($tbl_penerimaan_surat as $p): ?>
-                                                    <tr>
-                                                        <td>
-                                                            <?= $row++ ?>
-                                                        </td>
-                                                        <td>
-                                                            <?= date('d/m/Y', strtotime($p['tanggal'])); ?>
-                                                        </td>
-                                                        <td>
-                                                            <?= $p['no_surat'] ?>
-                                                        </td>
-                                                        <td>
-                                                            <?= $p['nama_surat'] ?>
-                                                        </td>
-                                                        <td>
-                                                            <?= $p['nama_pegawai'] ?>
-                                                        </td>
-                                                        <td>
-                                                            <?php if ($p['status'] == 'Diterima'): ?>
-                                                                <span class="badge badge-success">Diterima</span>
-                                                            <?php else: ?>
-                                                                <span class="badge badge-danger">Belum Diterima</span>
-                                                            <?php endif; ?>
-                                                        </td>
-                                                    </tr>
-                                                <?php endforeach; ?>
-                                            <?php endif; ?>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                            <!-- /.Penerimaan Surat -->
                         </div>
                     </div>
+
+                    <!-- Penerimaan Surat -->
+                    <div class="card">
+                        <!-- /.Card Header -->
+                        <div class="card-body">
+                            <div class="row mb-2">
+                                <div class="col-sm-6">
+                                    <h4 class="m-0">Table Penerimaan Surat Terbaru</h1>
+                                </div>
+                            </div><!-- /.row -->
+                            <table id="tableSurat" class="table table-bordered table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Rendering engine</th>
+                                        <th>Browser</th>
+                                        <th>Platform(s)</th>
+                                        <th>Engine version</th>
+                                        <th>CSS grade</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Trident</td>
+                                        <td>Internet
+                                            Explorer 4.0
+                                        </td>
+                                        <td>Win 95+</td>
+                                        <td> 4</td>
+                                        <td>X</td>
+                                    </tr>
+
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <th>Rendering engine</th>
+                                        <th>Browser</th>
+                                        <th>Platform(s)</th>
+                                        <th>Engine version</th>
+                                        <th>CSS grade</th>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+
                 </div>
-                <!-- /.content -->
             </div>
-
-            <!-- Main Footer -->
-            <footer class="main-footer">
-                <!-- To the right -->
-                <div class="float-right d-none d-sm-inline">
-                    Anything you want
-                </div>
-                <!-- Default to the left -->
-                <strong>Copyright &copy; 2014-2021 <a href="https://adminlte.io">AdminLTE.io</a>.</strong>
-                All rights
-                reserved.
-            </footer>
         </div>
-        <!-- ./wrapper -->
+        <!-- /.content -->
 
-        <!-- REQUIRED SCRIPTS -->
+        <!-- Control Sidebar -->
+        <aside class="control-sidebar control-sidebar-dark">
+            <!-- Control sidebar content goes here -->
+            <div class="p-3">
+                <h5>Title</h5>
+                <p>Sidebar content</p>
+            </div>
+        </aside>
+        <!-- /.control-sidebar -->
 
-        <!-- jQuery -->
-        <script src="../../plugins/jquery/jquery.min.js"></script>
-        <!-- Bootstrap 4 -->
-        <script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-        <!-- DataTables  & Plugins -->
-        <script src="../../plugins/datatables/jquery.dataTables.min.js"></script>
-        <script src="../../plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
-        <script src="../../plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
-        <script src="../../plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
-        <script src="../../plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
-        <script src="../../plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
-        <!-- AdminLTE App -->
-        <script src="../../dist/js/adminlte.min.js"></script>
-        <!-- Sweet Alert -->
-        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-        <!-- ChartJS -->
-        <script src="../../plugins/chart.js/Chart.min.js"></script>
-        <!-- Page specific script -->
-        <!-- SweetAlert Error Modal -->
-        <script>
-            <?php if (isset($errors) && !empty($errors)): ?>
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Oops...',
-                    html: '<?php echo implode("<br>", $errors); ?>',
-                });
-            <?php endif; ?>
-        </script>
+        <!-- Main Footer -->
+        <footer class="main-footer">
+            <!-- To the right -->
+            <div class="float-right d-none d-sm-inline">
+                Anything you want
+            </div>
+            <!-- Default to the left -->
+            <strong>Copyright &copy; 2014-2021 <a href="https://adminlte.io">AdminLTE.io</a>.</strong>
+            All rights
+            reserved.
+        </footer>
+    </div>
+    <!-- ./wrapper -->
 
-        <!-- SweetAlert Success Modal -->
-        <script>
-            <?php if (session()->get('success')): ?>
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Success',
-                    text: <?php echo json_encode(session()->get('success')); ?>,
-                });
-            <?php endif; ?>
-        </script>
+    <!-- REQUIRED SCRIPTS -->
 
-        <!-- Sweetalert untuk More Info User -->
-        <script>
-            function userinfo() {
-                swal.fire({
-                    icon: 'info',
-                    title: 'Just Information',
-                    text: 'Untuk Penambahan Resepsionis, Silahkan hubungi admin!!',
-                });
-            }
-        </script>
-
-        <!-- Table Barang -->
-        <script>
-            $(function () {
-                $('#tableBarang').DataTable({
-                    "paging": false,
-                    "lengthChange": false,
-                    "searching": false,
-                    "ordering": false,
-                    "info": true,
-                    "autoWidth": false,
-                    "responsive": true,
-                });
+    <!-- jQuery -->
+    <script src="../../plugins/jquery/jquery.min.js"></script>
+    <!-- Bootstrap 4 -->
+    <script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- DataTables  & Plugins -->
+    <script src="../../plugins/datatables/jquery.dataTables.min.js"></script>
+    <script src="../../plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+    <script src="../../plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="../../plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+    <script src="../../plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+    <script src="../../plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="../../dist/js/adminlte.min.js"></script>
+    <!-- Page specific script -->
+    <!-- Table Barang -->
+    <script>
+        $(function () {
+            $('#tableBarang').DataTable({
+                "paging": false,
+                "lengthChange": false,
+                "searching": false,
+                "ordering": false,
+                "info": true,
+                "autoWidth": false,
+                "responsive": true,
             });
-        </script>
-        <!-- Table Surat -->
-        <script>
-            $(function () {
-                $('#tableSurat').DataTable({
-                    "paging": false,
-                    "lengthChange": false,
-                    "searching": false,
-                    "ordering": true,
-                    "info": true,
-                    "autoWidth": false,
-                    "responsive": true,
-                });
+        });
+    </script>
+    <!-- Table Surat -->
+    <script>
+        $(function () {
+            $('#tableSurat').DataTable({
+                "paging": true,
+                "lengthChange": false,
+                "searching": false,
+                "ordering": true,
+                "info": true,
+                "autoWidth": false,
+                "responsive": true,
             });
-        </script>
-
-        <!-- Chart -->
-        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-        <script>
-            var ctx = document.getElementById('chartBarang').getContext('2d');
-            fetch("<?php echo site_url('Dashboard/chartDataBarang') ?>")
-                .then(response => response.json())
-                .then(data => {
-                    var labels = [...new Set(data.map(item => item.tanggal))];
-                    labels.sort((a, b) => new Date(a) - new Date(b)); // Menambahkan baris ini untuk mengurutkan tanggal
-                    var datasetDiterima = labels.map(label => {
-                        return data.filter(item => item.tanggal === label && item.status === 'Diterima').length;
-                    });
-                    var datasetBelumDiterima = labels.map(label => {
-                        return data.filter(item => item.tanggal === label && item.status !== 'Diterima').length;
-                    });
-                    var chart = new Chart(ctx, {
-                        type: 'line', // Mengubah tipe grafik ini menjadi 'line'
-                        data: {
-                            labels: labels,
-                            datasets: [{
-                                label: 'Diterima',
-                                data: datasetDiterima,
-                                backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                                borderColor: 'rgba(75, 192, 192, 1)',
-                                borderWidth: 1,
-                                tension: 0.4,
-                                fill: true // Menambahkan baris ini untuk mengisi area di bawah garis
-                            }, {
-                                label: 'Belum Diterima',
-                                data: datasetBelumDiterima,
-                                backgroundColor: 'rgba(255, 99, 132, 0.2)',
-                                borderColor: 'rgba(255, 99, 132, 1)',
-                                borderWidth: 1,
-                                tension: 0.4,
-                                fill: true // Menambahkan baris ini untuk mengisi area di bawah garis
-                            }]
-                        },
-                        options: {
-                            scales: {
-                                y: {
-                                    beginAtZero: true,
-                                    ticks: {
-                                        stepSize: 1
-                                    }
-                                }
-                            }
-                        }
-                    });
-                });
-        </script>
+        });
+    </script>
 </body>
 
 </html>
