@@ -6,6 +6,18 @@ body {
   animation: gradient 5s ease infinite;
 }
 
+.image-not-found {
+  width: 150px;
+  height: 100px;
+  background-color: #eee;
+  /* or any desired background color */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #888;
+  /* or any desired text color */
+}
+
 @keyframes gradient {
   0% {
     background-position: 100% 50%;
