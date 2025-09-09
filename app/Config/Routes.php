@@ -25,6 +25,7 @@ $routes->get('/Dashboard/chartDataBarang', 'Dashboard::chartDataBarang');
 $routes->get('/DaftarBarang', 'DaftarBarang::index');
 $routes->get('/DaftarBarang/tambahBarang', 'DaftarBarang::tambahBarang');
 $routes->post('/DaftarBarang/tambahBarang', 'DaftarBarang::tambahBarang');
+$routes->get('DaftarBarang/kirimWA/(:num)', 'DaftarBarang::kirimWA/$1');
 
 $routes->get('/DaftarBarang/ubahBarang/(:any)', 'DaftarBarang::ubahBarang/$1');
 $routes->post('/DaftarBarang/ubahbarang/(:any)', 'DaftarBarang::ubahBarang/$1');
@@ -38,6 +39,7 @@ $routes->get('/DaftarBarang/exportpdf', 'DaftarBarang::exportpdf');
 $routes->get('/DaftarSurat', 'DaftarSurat::index');
 $routes->get('/DaftarSurat/tambahSurat', 'DaftarSurat::tambahSurat');
 $routes->post('/DaftarSurat/tambahSurat', 'DaftarSurat::tambahSurat');
+$routes->get('/DaftarSurat/kirimWA/(:num)', 'DaftarSurat::kirimWA/$1');
 
 $routes->get('/DaftarSurat/ubahSurat/(:any)', 'DaftarSurat::ubahSurat/$1');
 $routes->post('/DaftarSurat/ubahSurat/(:any)', 'DaftarSurat::ubahSurat/$1');

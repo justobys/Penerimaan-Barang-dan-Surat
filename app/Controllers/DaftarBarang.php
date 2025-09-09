@@ -4,10 +4,10 @@ namespace App\Controllers;
 
 use App\Models\DataBarangM;
 use App\Models\PegawaiM;
+use App\Helpers\WAGatewayHelper;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 use Dompdf\Dompdf;
-
 
 class DaftarBarang extends BaseController
 {
@@ -22,7 +22,42 @@ class DaftarBarang extends BaseController
         return view('penerimaan_barang', compact('data'));
     }
 
+    public function kirimWA($id)
+    {
+        $model = new DataBarangM();
+        $data = $model->find($id);
 
+        if (!$data) {
+            return redirect()->to('/DaftarBarang')->with('error', 'Data barang tidak ditemukan');
+        }
+
+        $pegawaiModel = new PegawaiM();
+        $pegawai = $pegawaiModel->getPegawaiById($data['id_pegawai']);
+
+        if (!$pegawai) {
+            return redirect()->to('/DaftarBarang')->with('error', 'Data pegawai tidak ditemukan');
+        }
+
+        $waHelper = new WAGatewayHelper();
+        $nomorTujuan = $pegawai['nomor'];
+        $pesan = "Hai *{$pegawai['nama_pegawai']}*\nAda pesanan Barang {$data['nama_barang']} dengan nomor resi {$data['no_resi']} telah diterima.\nSilahkan datang segera ke lokasi pengambilan.";
+
+        $fotoPath = FCPATH . $data['foto_barang'];
+
+        if (file_exists($fotoPath) && is_readable($fotoPath)) {
+            $result = $waHelper->kirimPesanDenganFoto($nomorTujuan, $pesan, $fotoPath);
+        } else {
+            $result = $waHelper->kirimPesan($nomorTujuan, $pesan);
+            log_message('error', "File tidak ditemukan atau tidak dapat dibaca: $fotoPath");
+        }
+
+        if (isset($result['error'])) {
+            return redirect()->to('/DaftarBarang')->with('error', 'Gagal mengirim pesan WA: ' . $result['error']);
+        } else {
+            $model->update($id, ['status' => 'Diterima']);
+            return redirect()->to('/DaftarBarang')->with('message', 'Pesan WA berhasil dikirim dan status barang diperbarui');
+        }
+    }
 
     public function tambahBarang()
     {

@@ -7,6 +7,16 @@ use CodeIgniter\Model;
 class DataSuratM extends Model
 {
     protected $table = 'tbl_penerimaan_surat';
+    protected $primaryKey = 'id';
+
+    protected $allowedFields = [
+        'no_surat',
+        'nama_surat',
+        'id_pegawai',
+        'status',
+        'foto_surat',
+        'tanggal'
+    ];
 
     public function getTableSurat($limit = 10)
     {

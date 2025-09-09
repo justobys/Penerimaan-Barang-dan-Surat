@@ -81,6 +81,12 @@
                                                         required>
                                                 </div>
                                                 <div class="form-group">
+                                                    <label for="nomor">Nomor Pegawai</label>
+                                                    <input type="text" class="form-control" id="nomor"
+                                                        name="nomor" placeholder="Masukkan Nomor Pegawai" value="<?= $dataPegawai['nomor'] ?>"
+                                                        required>
+                                                </div>
+                                                <div class="form-group">
                                                     <label for="email">Email</label>
                                                     <input type="email" class="form-control" id="email" name="email"
                                                         placeholder="Masukkan Email Pegawai" value="<?= $dataPegawai['email'] ?>" required>
@@ -102,16 +108,16 @@
         </div>
 
         <!-- Main Footer -->
-        <footer class="ml-2 mr-2 mt-auto">
-            <!-- To the right -->
-            <div class="float-right d-none d-sm-inline">
-                Anything you want
-            </div>
-            <!-- Default to the left -->
-            <strong>Copyright &copy; 2014-2021 <a href="https://adminlte.io">AdminLTE.io</a>.</strong>
-            All rights
-            reserved.
-        </footer>
+            <footer class="main-footer">
+                <!-- To the right -->
+                <div class="float-right d-none d-sm-inline">
+                    Anything you want
+                </div>
+                <!-- Default to the left -->
+                <strong>Copyright &copy; 2014-2021 <a href="https://adminlte.io">Andi Muhammad Fadjrin Arif</a>.</strong>
+                All rights
+                reserved.
+            </footer>
     </div>
     <!-- ./wrapper -->
 

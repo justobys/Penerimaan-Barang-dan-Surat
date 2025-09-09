@@ -26,6 +26,7 @@ class Pegawai extends BaseController
             $data = [
                 'nama_pegawai' => $this->request->getPost('nama_pegawai'),
                 'email' => $this->request->getPost('email'),
+                'nomor' => $this->request->getPost('nomor'),
             ];
 
             $model->insertPegawai($data);
@@ -44,6 +45,7 @@ class Pegawai extends BaseController
             $data = [
                 'nama_pegawai' => $this->request->getPost('nama_pegawai'),
                 'email' => $this->request->getPost('email'),
+                'nomor' => $this->request->getPost('nomor'),
             ];
             $model->updatePegawai($idpegawai, $data);
             return redirect()->to('/Pegawai')->with('success', 'Data Pegawai Berhasil Diubah');

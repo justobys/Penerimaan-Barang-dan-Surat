@@ -256,6 +256,8 @@
                             <td class="text-center">
                               <a href="DaftarBarang/ubahBarang/<?= $p['id'] ?>" class="btn btn-warning mb-1">
                                 <i class="fas fa-pencil-alt mr-1"></i>Ubah
+                              </a><a href="DaftarBarang/kirimWA/<?= $p['id'] ?>" class="btn btn-primary mb-1">
+                                <i class="fas fa-paper-plane mr-1"></i>Kirim
                               </a>
                               <button class="btn btn-danger mb-1" onclick="confirmDelete(<?= $p['id'] ?>)">
                                 <i class="fas fa-trash mr-1"></i>Delete
@@ -289,8 +291,9 @@
             Anything you want
           </div>
           <!-- Default to the left -->
-          <strong>Copyright &copy; 2014-2021 <a href="https://adminlte.io">AdminLTE.io</a>.</strong>
-          All rights reserved.
+          <strong>Copyright &copy; 2014-2021 <a href="https://adminlte.io">Andi Muhammad Fadjrin Arif</a>.</strong>
+          All rights
+          reserved.
         </footer>
       </div>
       <!-- ./wrapper -->
@@ -330,6 +333,16 @@
             icon: 'success',
             title: 'Success',
             text: <?php echo json_encode(session()->get('success')); ?>,
+          });
+        <?php endif; ?>
+      </script>
+
+      <script>
+        <?php if (session()->get('message')): ?>
+          Swal.fire({
+            icon: 'success',
+            title: 'Success',
+            text: <?php echo json_encode(session()->get('message')); ?>,
           });
         <?php endif; ?>
       </script>

@@ -7,12 +7,23 @@ use CodeIgniter\Model;
 class DataBarangM extends Model
 {
     protected $table = 'tbl_penerimaan_barang';
+    protected $primaryKey = 'id';
+
+    protected $allowedFields = [
+        'no_resi',
+        'nama_barang',
+        'deskripsi',
+        'id_pegawai',
+        'status',
+        'foto_barang',
+        'tanggal'
+    ];
 
     public function getTableBarang($limit = 10)
     {
         return $this->db->table($this->table)
             ->select('tbl_penerimaan_barang.*, tbl_pegawai.nama_pegawai')
-            ->join('tbl_pegawai', 'tbl_pegawai.id_pegawai = tbl_penerimaan_barang.id_pegawai', 'left') // Sesuaikan dengan kolom relasi yang benar
+            ->join('tbl_pegawai', 'tbl_pegawai.id_pegawai = tbl_penerimaan_barang.id_pegawai', 'left')
             ->orderBy('tanggal', 'DESC')
             ->limit($limit)
             ->get()
